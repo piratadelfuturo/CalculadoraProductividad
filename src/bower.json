@@ -1,0 +1,29 @@
+{
+  "name": "calculadora",
+  "version": "0.0.1",
+  "authors": [
+    "Daniel M <daniel.maldonado@gmail.com>"
+  ],
+  "description": "calculadora de productividad",
+  "main": "./app.js",
+  "keywords": [
+    "calculadora",
+    "productividad",
+    "mexico"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v3.0.3",
+    "jquery": "2.1.0",
+    "json2": "*",
+    "underscore": "1.5.2"
+  }
+}
