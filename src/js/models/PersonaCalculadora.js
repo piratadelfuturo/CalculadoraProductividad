@@ -1,19 +1,19 @@
-define(['backbone', "../models/Calculadora"], function(backbone, Calculadora) {
+define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _, Calculadora) {
     var PersonaCalculadora = Calculadora.extend(
             {
                 defaults: _.extend(
                         {}, Calculadora.prototype.defaults,
                         {
-                            sector: null,
-                            estudio: null,
-                            salarioMes: 0,
-                            horasDia: 0,
-                            diasSemana: 0,
+                            sector: 0,
+                            estudio: 0,
+                            salarioMes: 4500.00,
+                            horasDia: 8,
+                            diasSemana: 5,
                             horasMes: 0,
-                            salarioHora: 0,
-                            salarioComparado: 0,
-                            opcionesSectores: [],
-                            opcionesEstudios: [],
+                            salarioHora: 0.0,
+                            salarioComparado: 0.0,
+                            opcionesSectores: [''],
+                            opcionesEstudios: [''],
                             datos: [],
                             promedio: []
                         }
@@ -21,41 +21,47 @@ define(['backbone', "../models/Calculadora"], function(backbone, Calculadora) {
                 initialize: function() {
                     var self = this;
                     Calculadora.prototype.initialize.apply(this, arguments);
-                    this.on({
-                        "change:diasSemana change:horasDia": this.calculateHorasMes,
-                        "change:salarioMes change:horasMes": this.calculateSalarioHora,
-                        "change:sector change:estudios": this.calculateSalarioComparado
+                    self.calculateHorasMes();
+                    self.calculateSalarioHora();
+                    self.on({
+                        "change:diasSemana change:horasDia": self.calculateHorasMes,
+                        "change:salarioMes change:horasMes": self.calculateSalarioHora,
+                        "change:sector change:estudios": self.calculateSalarioComparado,
+                        "change:datos": self.calculatePromedio
                     });
-                    this.loadData();
                 },
                 calculateHorasMes: function() {
-                    var self = this;
-                    var horasDia = self.get('horasDia');
-                    var diasSemana = self.get('diasSemana');
+                    var self = this,
+                            horasDia = self.get('horasDia'),
+                            diasSemana = self.get('diasSemana');
                     self.set('horasMes', horasDia * diasSemana * 4)
                 },
                 calculateSalarioHora: function() {
-                    var self = this;
-                    var horasMes = self.get('horasMes');
-                    var salarioMes = self.get('salarioMes');
-                    self.set('salarioHora', salarioMes / horasMes);
+                    var self = this,
+                            horasMes = self.get('horasMes'),
+                            salarioMes = self.get('salarioMes'),
+                            salarioHora = salarioMes / horasMes;
+
+                    self.set('salarioHora', salarioHora.toFixed(2));
                 },
                 calculateSalarioComparado: function() {
-                    var self = this;
-                    var sector = self.get('sector');
-                    var estudios = self.get('estudios');
-                    var promedio = self.get('promedio');
-                    self.set('salarioComparado', promedio[sector][estudios]);
+                    var self = this,
+                            sector = self.get('sector'),
+                            estudio = self.get('estudio'),
+                            promedio = self.get('promedio');
+                    self.set('salarioComparado', promedio[sector][estudio]);
                 },
                 loadData: function(s, e, d) {
-                    var self = this;
+                    var self = this,
+                            datos = [],
+                            sectores = s.split("\n"),
+                            estudios = e.split("\n");
 
-                    var datos = [];
-                    var sectores = [];
-                    var estudios = [];
-
-                    var promedio = [];
-                    _.each(d.split("\n"), function(row) {
+                    var dataSplit = d.split("\n");
+                    if (!(dataSplit.length === sectores.length && dataSplit[0] && dataSplit[0].split("\t").length % estudios.length === 0)) {
+                        throw "datos incorrectos";
+                    }
+                    _.each(dataSplit, function(row) {
                         row = _.map(row.split("\t"), function(x) {
                             var value = 0;
                             if (x !== '') {
@@ -65,27 +71,33 @@ define(['backbone', "../models/Calculadora"], function(backbone, Calculadora) {
                         });
                         datos.push(row);
                     });
-                    _.each(e.split("\n"), function(row) {
-                        estudios.push(row);
-                    });
 
-                    var counter = 0;
-                    _.each(s.split("\n"), function(row) {
-                        sectores.push(row);
-                        var row = [];
-                        for (var y = 0; y <= 5; y++) {
-                            row[y] = 0;
-                            for (var x = 0; x <= (estudios.length - 1); x++) {
-                                var value = parseFloat(datos[counter][(x * 6) + y]);
-                                row[y] += value;
-                            }
-                            row[y] = row[y] / 3;
-                        }
-                        promedio.push(row);
-                    });
                     self.set('opcionesEstudios', estudios);
                     self.set('opcionesSectores', sectores);
                     self.set('datos', datos);
+                    self.calculatePromedio();
+                },
+                calculatePromedio: function() {
+                    var self = this,
+                            promedio = [],
+                            estudios = self.get('opcionesEstudios'),
+                            sectores = self.get('opcionesSectores'),
+                            datos = self.get('datos'),
+                            secciones = datos[0].length / estudios.length;
+                    _.each(sectores, function(sector, counter) {
+                        var row = [];
+                        for (var y = 0; y <= (estudios.length - 1); y++) {
+                            row[y] = 0;
+                            for (var x = 0; x <= (secciones - 1); x++) {
+                                var position = (x * estudios.length) + y;                                
+                                var value = parseFloat(datos[counter][position]);
+                                row[y] += value;
+                            }
+                            row[y] = row[y] / secciones;
+                            row[y] = row[y].toFixed(2);
+                        }
+                        promedio.push(row);
+                    });
                     self.set('promedio', promedio);
                 }
             });

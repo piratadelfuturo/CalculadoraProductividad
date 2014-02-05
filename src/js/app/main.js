@@ -4,7 +4,9 @@ requirejs.config(
                 "underscore": "../libs/underscore",
                 "bootstrap": "../libs/bootstrap",
                 "jquery": "../libs/jquery-2.1.0",
-                "backbone": "../libs/backbone"
+                "backbone": "../libs/backbone",
+                "gauge": "../libs/gauge.min",
+                "gagauge": "../libs/gagauge"
             },
             shim: {
                 "underscore": {
@@ -20,6 +22,9 @@ requirejs.config(
                 },
                 "jquery": {
                     exports: '$'
+                },
+                "gauge":{
+                    exports: 'Gauge'
                 }
             }
         });
