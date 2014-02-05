@@ -14,56 +14,54 @@
     </head>
     <body>
         <header>
-
         </header>
-        <section>
-            <form id="cp-personas" class="calculadora">
+        <section id="calculadora_base"></section>
+        <footer>
+        </footer>
+        <script type="text/template" id="ce_template">
+            <form id="cp_form" class="calculadora">
                 <fieldset>
                     <legend>Calculadora de Productividad para Personas</legend>
-                    <label for="cp-sector">Sector</label>
-                    <select id="cp-sector">
+                    <label for="cp_sector">Sector</label>
+                    <select id="cp_sector">
                         <option></option>
                     </select>
-                    <label for="cp-estudios">Estudios</label>
-                    <select id="cp-estudios">
+                    <label for="cp_estudios">Estudios</label>
+                    <select id="cp_estudios">
                         <option></option>
                     </select>
-                    <label for="cp-salario">salario</label>
-                    <input id="cp-salario" value="" />
-                    <label for="cp-horas-dia">Horas trabajadas al día</label>
-                    <input id="cp-horas-dia" value="" />
-                    <label for="cp-horas-semana">Horas trabjadas a la semana</label>
-                    <input id="cp-horas-semana" value="" />
-
+                    <label for="cp_salario">salario</label>
+                    <input id="cp_salario" value="" />
+                    <label for="cp_horas_dia">Horas trabajadas al día</label>
+                    <input id="cp_horas_dia" value="" />
+                    <label for="cp_horas_semana">Horas trabjadas a la semana</label>
+                    <input id="cp_horas_semana" value="" />
                 </fieldset>
-            </form>
-        </section>
-        <section>
-            <form id="ce-calculadora" class="calculadora">
+            </form>            
+        </script>
+        <script type="text/template" id="cp_template">
+            <form id="ce_form" class="calculadora">
                 <fieldset>
                     <legend>Calculadora de Productividad para Empresas</legend>
                     <fieldset>
-                        <label for="ce-residencia">Residencia</label>
-                        <select id="ce-residencia">
+                        <label for="ce_residencia">Residencia</label>
+                        <select id="ce_residencia">
                             <option></option>
                         </select>
                     </fieldset>
                     <fieldset>
-                        <label for="ce-sector">Sector</label>
+                        <label for="ce_sector">Sector</label>
                         <select id="ce–sector">
                             <option></option>
                         </select>
-                        <label for="ce-trabajadores">Trabajadores</label>
-                        <input id="ce-trabajadores" value="" />
-                        <label for="ce-produccion">Produccion</label>
-                        <input id="ce-produccion" value="" />
+                        <label for="ce_trabajadores">Trabajadores</label>
+                        <input id="ce_trabajadores" value="" />
+                        <label for="ce_produccion">Produccion</label>
+                        <input id="ce_produccion" value="" />
                     </fieldset>
                 </fieldset>    
             </form>
-        </section>
-        <footer>
-
-        </footer>
+        </script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <!--
         <script src="/js/jquery-2.1.0.js"></script>
