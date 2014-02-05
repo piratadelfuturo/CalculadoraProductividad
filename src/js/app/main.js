@@ -2,10 +2,9 @@ requirejs.config(
         {
             paths: {
                 "underscore": "../libs/underscore",
-                "bootstrap": "../libs/bootstrap",
-                "jquery": "../libs/jquery-2.1.0",
-                "backbone": "../libs/backbone",
-                "gauge": "../libs/gauge.min",
+                "bootstrap": "../libs/bootstrap.min",
+                "jquery": "../libs/jquery-2.1.0.min",
+                "backbone": "../libs/backbone-min",
                 "gagauge": "../libs/gagauge"
             },
             shim: {
@@ -23,7 +22,7 @@ requirejs.config(
                 "jquery": {
                     exports: '$'
                 },
-                "gauge":{
+                "gauge": {
                     exports: 'Gauge'
                 }
             }
@@ -33,6 +32,7 @@ requirejs.config(
 
 require(['jquery', '../views/PersonaCalculadoraView'], function($, PersonaCalculadoraView) {
     var x = new PersonaCalculadoraView({
-        el : $('#calculadora_base')        
+        el: $('#calculadora_base')
     });
+    console.log(x.model.toJSON());
 });

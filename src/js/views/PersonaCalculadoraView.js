@@ -99,8 +99,12 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                     horasMes = self.model.get('horasMes'),
                     salarioHora = self.model.get('salarioHora'),
                     salarioComparado = self.model.get('salarioComparado'),
-                    productividad = salarioHora / salarioComparado,
-                    color = '#66FF99',side = 1;
+                    productividad = self.model.get('productividad'),
+                    color = '#66FF99', side = 1;
+            horasMesInput.val(horasMes);
+            salarioHoraInput.val(salarioHora);
+            salarioComparadoInput.val(salarioComparado);
+            
             if (productividad < 1) {
                 productividad = 1 - productividad;
                 color = '#FF3366';
@@ -117,11 +121,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             productividad = productividad * 100;
             productividad = parseFloat(productividad).toFixed(2);
 
-            horasMesInput.val(horasMes);
-            salarioHoraInput.val(salarioHora);
-            salarioComparadoInput.val(salarioComparado);
-            //productividadBox.text(productividad);
-            self.gauge.set(Math.round(productividad*side));
+            self.gauge.set(Math.round(productividad * side));
             self.gauge.color(color);
         },
         renderGauge: function() {

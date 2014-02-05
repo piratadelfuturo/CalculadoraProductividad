@@ -27,7 +27,8 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                         "change:diasSemana change:horasDia": self.calculateHorasMes,
                         "change:salarioMes change:horasMes": self.calculateSalarioHora,
                         "change:sector change:estudios": self.calculateSalarioComparado,
-                        "change:datos": self.calculatePromedio
+                        "change:datos": self.calculatePromedio,
+                        "change:salarioHora change:salarioComparado": self.calculateProductividad
                     });
                 },
                 calculateHorasMes: function() {
@@ -50,6 +51,10 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                             estudio = self.get('estudio'),
                             promedio = self.get('promedio');
                     self.set('salarioComparado', promedio[sector][estudio]);
+                },
+                calculateProductividad: function(){
+                    var self = this;
+                    self.set('productividad',self.get('salarioHora') / self.get('salarioComparado'));
                 },
                 loadData: function(s, e, d) {
                     var self = this,
