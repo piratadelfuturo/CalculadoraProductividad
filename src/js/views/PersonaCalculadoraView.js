@@ -1,9 +1,9 @@
 define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gagauge'], function(backbone, _, PersonaCalculadora, $, Gagauge) {
     var PersonaCalculadoraView = Backbone.View.extend({
         dataUrls: {
-            opcionesSectoresUrl: '/data/personas/sectores',
-            opcionesEstudiosUrl: '/data/personas/estudios',
-            datosUrl: '/data/personas/datos'
+            opcionesSectoresUrl: './data/personas/sectores',
+            opcionesEstudiosUrl: './data/personas/estudios',
+            datosUrl: './data/personas/datos'
         },
         model: new PersonaCalculadora(),
         gauge: null,
@@ -20,15 +20,18 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             var self = this;
             var sectoresRequest = $.ajax({
                 url: self.dataUrls.opcionesSectoresUrl,
-                dataType: 'text'
+                dataType: 'text',
+                iframe: true
             });
             var estudiosRequest = $.ajax({
                 url: self.dataUrls.opcionesEstudiosUrl,
-                dataType: 'text'
+                dataType: 'text',
+                iframe: true
             });
             var datosRequest = $.ajax({
                 url: self.dataUrls.datosUrl,
-                dataType: 'text'
+                dataType: 'text',
+                iframe: true
             });
             $.when(sectoresRequest, estudiosRequest, datosRequest).then(function(sectores, estudios, datos) {
                 self.model.loadData(sectores[0], estudios[0], datos[0]);
