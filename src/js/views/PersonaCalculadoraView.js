@@ -100,7 +100,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                     salarioHora = self.model.get('salarioHora'),
                     salarioComparado = self.model.get('salarioComparado'),
                     productividad = self.model.get('productividad'),
-                    color = '#66FF99', side = 1;
+                    color = '#66FF99', bgcolor = '#fff', side = 1;
             horasMesInput.val(horasMes);
             salarioHoraInput.val(salarioHora);
             salarioComparadoInput.val(salarioComparado);
@@ -108,21 +108,24 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             if (productividad < 1) {
                 productividad = 1 - productividad;
                 color = '#FF3366';
+                bgcolor = '#000';
                 side = -1;
             } else if (productividad > 1) {
                 productividad = productividad - 1;
                 color = '#66FF99';
+                bgcolor = '#fff';
                 side = 1;
             } else {
                 productividad = 0;
-                color = '#000'
+                color = '#000';
+                bgcolor = '#000';
                 side = 1;
             }
             productividad = productividad * 100;
             productividad = parseFloat(productividad).toFixed(2);
 
             self.gauge.set(Math.round(productividad * side));
-            self.gauge.color(color);
+            self.gauge.color(color,bgcolor);
         },
         renderGauge: function() {
             var gauge = new Gagauge($('#cp_gauge')[0]); // create sexy gauge!

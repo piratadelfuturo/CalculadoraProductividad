@@ -100,8 +100,11 @@ define(['jquery'], function($) {
             set: function(value){
                 new_degrees = Math.round((value*360)/100);
             },
-            color: function(value){
+            color: function(value,bgvalue){
                 color = value;
+                if(bgvalue){
+                    bgcolor = bgvalue;
+                }
             }
         }
     }
