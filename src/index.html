@@ -16,7 +16,7 @@
                 margin: .1em;
                 padding: .2em;
             }
-            #calculadora_base form fieldset, #calculadora_base form .controls{
+            #calculadora_base form .controls{
                 float: left;
             }
             #calculadora_base form fieldset{
@@ -50,9 +50,9 @@
             <section id="calculadora_base"></section>
             <footer>
             </footer>
-            <script type="text/template" id="ce_template">
+            <script type="text/template" id="cp_template">
                 <form id="cp_form" class="calculadora">
-                    <fieldset>
+                    <fieldset id="#cp_fs1">
                         <legend>Calculadora de Productividad para Personas</legend>
                         <label for="cp_sector">Sector</label>
                         <select id="cp_sector"></select>
@@ -64,6 +64,8 @@
                         <input id="cp_horas_dia" value="" min="1" max="24" step="1" type="number"/>
                         <label for="cp_dias_semana">Dias trabjados a la semana</label>
                         <input id="cp_dias_semana" value="" min="1" max="7" step="1" type="number"/>
+                        <fieldset>
+                        </fieldset>
                         <label for="cp_horas_mes">Horas trabjados al mes</label>
                         <input id="cp_horas_mes" value="" readonly min="0" step="1" type="number"/>                    
                         <label for="cp_salario_hora">Salario por hora que usted percibe</label>
@@ -80,23 +82,36 @@
                     </div>
                 </form>            
             </script>
-            <script type="text/template" id="cp_template">
+            <script type="text/template" id="ce_template">
                 <form id="ce_form" class="calculadora">
                 <fieldset>
-                <legend>Calculadora de Productividad para Empresas</legend>
-                <fieldset>
-                <label for="ce_residencia">Residencia</label>
-                <select id="ce_residencia"></select>
+                    <legend>Calculadora de Productividad para Empresas</legend>
+                    <fieldset id="ce_fs1">
+                        <label for="ce_residencia">Residencia</label>
+                        <select id="ce_residencia"></select>
+                    </fieldset>
+                    <fieldset id="ce_fs2" disabled="disabled">
+                        <label for="ce_sector">Sector</label>
+                        <select id="ce_sector"></select>
+                        <label for="ce_trabajadores">Trabajadores</label>
+                        <input id="ce_trabajadores" value="" />
+                        <label for="ce_produccion">Produccion</label>
+                        <input id="ce_produccion" value="" />
+                    </fieldset>
+                    <fieldset id="ce_fs3" disabled="disabled">
+                        <label for="ce_productividad_empresa" >Productividad de su Empresa</label>
+                        <input id="ce_productividad_empresa" value="" />                
+                        <label for="ce_productividad_sector" >Productividad del Sector</label>
+                        <input id="ce_productividad_sector" value="" />
+                    </fieldset>
                 </fieldset>
-                <fieldset>
-                <label for="ce_sector">Sector</label>
-                <select id="ce–sector"></select>
-                <label for="ce_trabajadores">Trabajadores</label>
-                <input id="ce_trabajadores" value="" />
-                <label for="ce_produccion">Produccion</label>
-                <input id="ce_produccion" value="" />
-                </fieldset>
-                </fieldset>    
+                <div class="controls">
+                        <div class="productividad">
+                            <span class="porcentaje"></span>
+                            <span class="indicador"></span>
+                        </div>
+                    <canvas id="ce_gauge" width="300" height="300"></canvas>
+                </div>
                 </form>
             </script>
             <script data-main="js/app/main" src="js/require.js"></script>

@@ -10,28 +10,23 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
         initialize: function() {
             var self = this;
             this.renderWait();
-            this.loadData(function() {
-                self.renderCalculadora();
-            });
+            this.loadData(self.renderCalculadora);
         },
         loadData: function(callback, error) {
             callback = !callback ? function() {
             } : callback;
-            var self = this;
-            var sectoresRequest = $.ajax({
-                url: self.dataUrls.opcionesSectoresUrl,
-                dataType: 'text',
-                iframe: true
-            });
-            var estudiosRequest = $.ajax({
+            var self = this,
+                    sectoresRequest = $.ajax({
+                        url: self.dataUrls.opcionesSectoresUrl,
+                        dataType: 'text'
+                    }),
+            estudiosRequest = $.ajax({
                 url: self.dataUrls.opcionesEstudiosUrl,
-                dataType: 'text',
-                iframe: true
-            });
-            var datosRequest = $.ajax({
+                dataType: 'text'
+            }),
+            datosRequest = $.ajax({
                 url: self.dataUrls.datosUrl,
-                dataType: 'text',
-                iframe: true
+                dataType: 'text'
             });
             $.when(sectoresRequest, estudiosRequest, datosRequest).then(function(sectores, estudios, datos) {
                 self.model.loadData(sectores[0], estudios[0], datos[0]);
@@ -48,15 +43,13 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
 
         },
         renderCalculadora: function() {
-            var self = this;
-            var el = this.$el;
-            var template = _.template($("#ce_template").html(), {});
+            var self = this, el = this.$el, template = _.template($("#cp_template").html(), {});
             el.html(template);
-            var sectorSelect = $('#cp_sector', el);
-            var estudiosSelect = $('#cp_estudios', el);
-            var salarioInput = $("#cp_salario", el);
-            var horasDiaInput = $("#cp_horas_dia", el);
-            var diasSemanaInput = $("#cp_dias_semana", el);
+            var sectorSelect = $('#cp_sector', el),
+                    estudiosSelect = $('#cp_estudios', el),
+                    salarioInput = $("#cp_salario", el),
+                    horasDiaInput = $("#cp_horas_dia", el),
+                    diasSemanaInput = $("#cp_dias_semana", el);
 
             sectorSelect.empty().on("change select DOMSubtreeModified", function() {
                 self.model.set("sector", $(this).val());
@@ -104,7 +97,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             horasMesInput.val(horasMes);
             salarioHoraInput.val(salarioHora);
             salarioComparadoInput.val(salarioComparado);
-            
+
             if (productividad < 1) {
                 productividad = 1 - productividad;
                 color = '#FF3366';
@@ -125,7 +118,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             productividad = parseFloat(productividad).toFixed(2);
 
             self.gauge.set(Math.round(productividad * side));
-            self.gauge.color(color,bgcolor);
+            self.gauge.color(color, bgcolor);
         },
         renderGauge: function() {
             var gauge = new Gagauge($('#cp_gauge')[0]); // create sexy gauge!

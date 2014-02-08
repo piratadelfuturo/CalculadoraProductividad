@@ -30,9 +30,6 @@ requirejs.config(
 
 
 
-require(['jquery', '../views/PersonaCalculadoraView'], function($, PersonaCalculadoraView) {
-    var x = new PersonaCalculadoraView({
-        el: $('#calculadora_base')
-    });
-    console.log(x.model.toJSON());
+require(['jquery', '../views/PersonaCalculadoraView', '../views/EmpresaCalculadoraView'], function($, PersonaCalculadoraView, EmpresaCalculadoraView) {
+    var x = new EmpresaCalculadoraView({el: $('#calculadora_base')});
 });
