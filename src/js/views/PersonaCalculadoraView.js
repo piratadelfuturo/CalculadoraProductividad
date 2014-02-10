@@ -52,10 +52,10 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                     diasSemanaInput = $("#cp_dias_semana", el);
 
             sectorSelect.empty().on("change select DOMSubtreeModified", function() {
-                self.model.set("sector", $(this).val());
+                self.model.set("sector", $(sectorSelect).val());
             });
             estudiosSelect.empty().on("change select DOMSubtreeModified", function() {
-                self.model.set("estudio", $(this).val());
+                self.model.set("estudio", $(estudiosSelect).val());
             });
             _.each(self.model.get('opcionesSectores'), function(a, b) {
                 var option = $("<option></option>");

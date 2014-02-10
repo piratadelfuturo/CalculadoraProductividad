@@ -26,7 +26,7 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                     self.on({
                         "change:diasSemana change:horasDia": self.calculateHorasMes,
                         "change:salarioMes change:horasMes": self.calculateSalarioHora,
-                        "change:sector change:estudios": self.calculateSalarioComparado,
+                        "change:sector change:estudio": self.calculateSalarioComparado,
                         "change:datos": self.calculatePromedio,
                         "change:salarioHora change:salarioComparado": self.calculateProductividad
                     });
@@ -50,6 +50,7 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                             sector = self.get('sector'),
                             estudio = self.get('estudio'),
                             promedio = self.get('promedio');
+
                     self.set('salarioComparado', promedio[sector][estudio]);
                 },
                 calculateProductividad: function(){
