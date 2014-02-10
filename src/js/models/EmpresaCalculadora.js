@@ -6,8 +6,8 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                         {
                             estado:0,
                             sector: 0,
-                            produccionAnual: 4500.00,
-                            totalTrabajadores: 8,
+                            produccionAnual: 150000000.00,
+                            totalTrabajadores: 1000,
                             productividad: 0.0,
                             productividadComparada: 0.0,
                             opcionesSectores: [''],
@@ -21,20 +21,27 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                     self.calculateProductividad();
                     self.on({
                         "change:produccionAnual change:totalTrabajadores": self.calculateProductividad,
-                        "change:sector": self.calculateProductividadComparada
+                        "change:sector": self.calculateProductividadComparada,
+                        "change:datos": self.calculateProductividadComparada
                     });
                 },
                 calculateProductividadComparada: function() {
                     var self = this,
                             sector = self.get('sector'),
-                            datos = self.get('datos');
-                    if(!!datos[sector]){
-                        self.set('productividadComparada', datos[sector][9]/datos[sector][1]);
+                            datos = self.get('datos'),
+                            estado = self.get('estado'),
+                            comparada = self.get('productividadComparada');
+                    
+                    if(!!datos[estado] && !! datos[estado][sector]){
+                        comparada = datos[estado][sector][9]/datos[estado][sector][1];
+                        self.set('productividadComparada', parseFloat((comparada)*1000).toFixed(2));
                     }
                 },
                 calculateProductividad: function(){
-                    var self = this;
-                    self.set('productividad',self.get('produccionAnual') / self.get('totalTrabajadores'));
+                    var self = this,
+                            prod = parseFloat(self.get('produccionAnual') / self.get('totalTrabajadores')).toFixed(2);
+                    
+                    self.set('productividad',prod);
                 },
                 loadData: function(d) {
                     var self = this,

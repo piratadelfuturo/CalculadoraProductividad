@@ -71,20 +71,28 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
                     productividadEmpresaInput = $('#ce_productividad_empresa',el),
                     productividadSectorInput =  $('#ce_productividad_sector',el);
 
+            productividadEmpresaInput.val(self.model.get("productividad"));
+            productividadSectorInput.val(self.model.get("productividadComparada"));  
+
             trabajadoresInput.val(self.model.get("totalTrabajadores")).change(function() {
-                self.model.set("totalTrabajadores", trabajadoresInput.val());
+                var trab = parseInt(trabajadoresInput.val());
+                trabajadoresInput.val(trab);
+                self.model.set("totalTrabajadores", trab);
             });
             produccionInput.val(self.model.get("produccionAnual")).change(function() {
-                self.model.set("produccionAnual", produccionInput.val());
+                var prod = parseFloat($(produccionInput).val()).toFixed(2);
+                $(produccionInput).val(prod);
+                self.model.set("produccionAnual", prod);
             });
             
-            productividadEmpresaInput.val(self.model.get("productividad")).change(function(){
-                    self.model.set("productividad", productividadEmpresaInput.val());
+            self.listenTo(self.model, "change:productividad", function() {
+                productividadEmpresaInput.val(self.model.get("productividad"));
+                });
+
+            self.listenTo(self.model, "change:productividadComparada", function() {
+                productividadSectorInput.val(self.model.get("productividadComparada"));
             });
-            productividadSectorInput.val(self.model.get("productividadComparada")).change(function(){
-                    self.model.set("productividadComparada", productividadSectorInput.val());
-            });
-            
+
             
             self.loadOptions(function() {
                 
@@ -92,21 +100,17 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
                     sectores = self.model.get("opcionesSectores");
                 
                 self.listenTo(self.model, "change:estado", function() {
-                    self.loadData(
-                            function(){
-                                $("#ce_fs2",self.$el).removeAttr("disabled");
-                            }
-                            )
+                    self.loadData()
                 });
 
                 $(estadosSelect).on("change select DOMSubtreeModified", function() {
-                    var value = $(this).val();
+                    var value = $(estadosSelect).val();
                     if (value !== '') {
                         self.model.set("estado", value);
                     }
                 });
                 $(sectoresSelect).on("select change DOMSubtreeModified", function() {
-                    var value = $(this).val();
+                    var value = $(sectoresSelect).val();
                     if (value !== '') {
                         self.model.set("sector", value);
                     }
@@ -117,27 +121,17 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
                 _.each(sectores, function(text, i) {
                     sectoresSelect.append($("<option></option>").val(i).text(text));
                 });
+                
+                self.listenTo(self.model, "change", self.updateValues);
+                self.renderGauge();
+                self.updateValues();
             });
-        },
-        renderWait: function() {
-
         },
         updateValues: function(x) {
             var self = this,
                     el = this.$el,
-                    horasMesInput = $("#cp_horas_mes", el),
-                    salarioHoraInput = $("#cp_salario_hora", el),
-                    salarioComparadoInput = $("#cp_salario_comparado", el),
-                    productividadBox = $('.controls .productividad .porcentaje', el),
-                    horasMes = self.model.get('horasMes'),
-                    salarioHora = self.model.get('salarioHora'),
-                    salarioComparado = self.model.get('salarioComparado'),
-                    productividad = self.model.get('productividad'),
+                    productividad = self.model.get('productividad')/self.model.get('productividadComparada'),
                     color = '#66FF99', bgcolor = '#fff', side = 1;
-            horasMesInput.val(horasMes);
-            salarioHoraInput.val(salarioHora);
-            salarioComparadoInput.val(salarioComparado);
-
             if (productividad < 1) {
                 productividad = 1 - productividad;
                 color = '#FF3366';
@@ -154,6 +148,7 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
                 bgcolor = '#000';
                 side = 1;
             }
+
             productividad = productividad * 100;
             productividad = parseFloat(productividad).toFixed(2);
 
@@ -161,9 +156,10 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
             self.gauge.color(color, bgcolor);
         },
         renderGauge: function() {
-            var gauge = new Gagauge($('#cp_gauge')[0]); // create sexy gauge!
+            var self = this;
+            var gauge = new Gagauge($('#ce_gauge', self.$el)[0]); // create sexy gauge!
             gauge.set(0); // set actual value
-            this.gauge = gauge;
+            self.gauge = gauge;
         }
     });
     return EmpresaCalculadoraView;

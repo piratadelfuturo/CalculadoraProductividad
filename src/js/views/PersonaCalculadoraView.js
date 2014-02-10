@@ -10,7 +10,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
         initialize: function() {
             var self = this;
             this.renderWait();
-            this.loadData(self.renderCalculadora);
+            this.loadData(self.render);
         },
         loadData: function(callback, error) {
             callback = !callback ? function() {
@@ -42,7 +42,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
         renderWait: function() {
 
         },
-        renderCalculadora: function() {
+        render: function() {
             var self = this, el = this.$el, template = _.template($("#cp_template").html(), {});
             el.html(template);
             var sectorSelect = $('#cp_sector', el),
