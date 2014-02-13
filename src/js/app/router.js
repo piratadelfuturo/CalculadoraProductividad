@@ -9,8 +9,8 @@ define([
         routes: {
             // Define some URL routes
             '': 'loader',
-            'personas': 'showPersonaCalculadora',
-            'empresas': 'showEmpresaCalculadora',
+            'personas/': 'showPersonaCalculadora',
+            'empresas/': 'showEmpresaCalculadora',
             // Default
             '*actions': 'defaultAction'
         }
