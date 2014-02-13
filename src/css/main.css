@@ -3,7 +3,7 @@
     body {
         padding-bottom: 70px;
     }
-    body > header, body > footer{
+    body > header, body footer,body > section{
         padding: 0 15px;
     }
 }
