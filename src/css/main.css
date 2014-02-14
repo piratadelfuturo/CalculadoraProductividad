@@ -1,11 +1,40 @@
 
-@media all{    
-    body {
-        padding-bottom: 70px;
+@media all{
+    body > *{
+        padding: 0px 15px;
     }
-    body > header, body footer,body > section{
-        padding: 0 15px;
+    body > section{
+        margin-bottom: 130px;
     }
+    
+    #logos a{
+        display:block;
+        padding: 10px;
+        height: 80px;
+        text-align: center;
+    }
+
+    .navbar{
+        margin-bottom: 0px;
+    }
+    
+    .calculadora > ul{
+        list-style-type: none;
+    }
+    
+    .calculadora > ul > li{
+        height:100px;
+        display: block;
+        width: 100%;
+        padding: 15% 10% 10%;
+        vertical-align: middle;
+    }
+    
+    .calculadora .panel{
+        margin-top: 80px;
+        
+    }
+
 }
 
 /*Custom font for numbers*/

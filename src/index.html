@@ -31,43 +31,293 @@
                 </div>
             </div>
         </header>
-        <section>
-            <div class="container-fluid">
-                <div class="row">
-                    <ul class="col-md-2 col-sm-1 nav nav-pills nav-stacked text-center">
-                        <li><a href="#"><span class="glyphicon glyphicon-home"></span><span class="glyphicon-class">inicio</span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-star"></span><span class="glyphicon-class">compartir</span></a></li>
-                    </ul>
-                    <!--
-                    <div id="calculadora_base">
-                        <nav>
-                            <a href="#/empresas">Calculadora para Empresas</a>
-                            <a href="#/personas">Calculadora para Personas</a>
-                        </nav>
-                    </div> -->
-                    <div class="col-md-10 col-sm-11">
-                        <div class="row">
-                            <div class="col-md-6 col-md-offset-3 col-sm-6  col-sm-offset-3">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h2 class="panel-title">¿Y tu eres productivo?</h2>
-                                    </div>
-                                    <div class="panel-body">
-                                        <p>Ser productivo es una actitud que busca el mejoramiento continuo. Es la conviccion de que las cosas se pueden hacer hoy mejor que ayer y que mañana mejor que hoy.</p>
-                                        <p>Existen muchas formas de medir la productividad, nosotros te presentamos una calculadora que permite visualizar el impacto directo de la productividad en tu economia dependiendo de tu profesion , sector o ubicacion geografica.</p>
-                                        <ul class="nav nav-pills">
-                                            <li><a href="#/personas/">Personas</a></li>
-                                            <li><a href="#/empresas/">Empresas</a></li>
-                                        </ul>
-                                    </div>
+        <section class="container-fluid">
+            <div class="row calculadora" id="inicio">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-sm-8  col-sm-offset-2">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">¿Y tu eres productivo?</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <p>Ser productivo es una actitud que busca el mejoramiento continuo. Es la conviccion de que las cosas se pueden hacer hoy mejor que ayer y que mañana mejor que hoy.</p>
+                                    <p>Existen muchas formas de medir la productividad, nosotros te presentamos una calculadora que permite visualizar el impacto directo de la productividad en tu economia dependiendo de tu profesion , sector o ubicacion geografica.</p>
+                                    <ul class="nav nav-pills">
+                                        <li><a href="#/personas/">Personas</a></li>
+                                        <li><a href="#/empresas/">Empresas</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer class="navbar navbar-default navbar-fixed-bottom">
-                <p class="navbar-text" >2014 Todos los derechos reservados</div>
+            <div class="row calculadora" id="personas-1">
+                <ul class="list-group col-sm-2 text-center hidden-xs">
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-home"></span><br>
+                        <span class="glyphicon-class">inicio</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-list-alt"></span><br>
+                        <span class="glyphicon-class">formulario</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-th-list"></span><br>
+                        <span class="glyphicon-class">resultados</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-star"></span><br>
+                        <span class="glyphicon-class">comparte</span>
+                    </li>
+                </ul>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-8  col-sm-offset-2">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Completa el siguiente formulario para realizar el diagnostico:</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">¿En que sector trabajas?</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">¿Cual es tu grado de estudios?</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">¿Cual es tu salario mensual?</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" class="form-control" placeholder="Ingresa tu salario">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">¿Cuantas horas trabajas al dia?</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">¿Cuantos dias trabajas a la semana?</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-default btn-lg btn-block">
+                                            Calcular productividad
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">El resultado de la calculadora es:</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><span class="glyphicon glyphicon-th-large" ></span>
+                                            <span>Comercio</span></li>
+                                        <li><span class="glyphicon glyphicon-book" ></span>
+                                            <span>Medio superior</span></li>
+                                    </ul>
+                                    <canvas id="calculadora-persona-graph">
+                                    </canvas>
+                                    <p>Eres x% mas productivo que el promedio nacional de las personas que trabajan en Comercio, con un niverl de educacion Medio superior y superior</p>
+                                    <a href="#" class="btn btn-primary btn-lg btn-block">
+                                        <span>Comparte el calculo con tus amigos</span>
+                                        <span class="glyphicon glyphicon-arrow-right"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Comparte la calculadora con tus amigos:</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="3">Yo calcule mi productividad con esta excelente app, el resultado fue de 24% mas productivo que el promedio nacional. Descubre que tan productivo eres.</textarea>
+                                        </div>
+                                    </form>
+                                    <div class="text-center">
+                                        <p>Compartir via:</p>
+                                        <p>
+                                            <a class="text-hide" href="#">Facebook</a>
+                                            <a class="text-hide" href="#">Twitter</a>
+                                            <a class="text-hide" href="#">Email</a>
+                                        </p>
+                                    </div>
+                                    <a href="#" class="btn btn-primary btn-lg btn-block">
+                                        <span>Volver a calcular mi productividad</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row calculadora" id="empresas-1">
+                <ul class="list-group col-sm-2 text-center hidden-xs">
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-home"></span><br>
+                        <span class="glyphicon-class">Inicio</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-map-marker"></span><br>
+                        <span class="glyphicon-class">Residencia</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-list-alt"></span><br>
+                        <span class="glyphicon-class">Formulario</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-th-list"></span><br>
+                        <span class="glyphicon-class">Resultados</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-star"></span><br>
+                        <span class="glyphicon-class">Comparte</span>
+                    </li>
+                </ul>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-8  col-sm-offset-2">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Porfavor indica donde reside tu empresa:</h2>
+                                </div>
+                                <div class="panel-body row text-center">
+                                    <div class="col-xs-6">
+                                        <h4>ESTADO</h4>
+                                        <canvas>
+                                        </canvas>
+                                        <p>
+                                            Selecciona esta opcion si tu empresa opera en un solo estado  
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h4>NACIONAL/ INTERTESTATAL</h4>
+                                        <canvas>
+                                        </canvas>
+                                        <p>
+                                            Selecciona esta opcion si tu empresa opera en dos o mas estados
+                                        </p>
+
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Completa el siguiente formulario para realizar el diagnostico:</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <form class="form-horizontal" role="form">
+                                        <div class="form-group">
+                                            <label  class="col-sm-4 control-label">¿En que sector trabaja su empresa?</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">En total ¿Cuantos trabajadores tiene su empresa?</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" class="form-control" placeholder="Ingresa la cantidad">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">¿Cual es el valor en pesos de la produccion anual de su empresa?</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" class="form-control" placeholder="Ingresa la cantidad">
+                                            </div>
+                                        </div>                                        
+                                        <button type="button" class="btn btn-default btn-lg btn-block">
+                                            Calcular productividad
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">El resultado de la calculadora es:</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><span class="glyphicon glyphicon-th-large" ></span>
+                                            <span>Comercio</span></li>
+                                        <li><span class="glyphicon glyphicon-book" ></span>
+                                            <span>Chihuahua</span></li>
+                                    </ul>
+                                    <canvas id="calculadora-persona-graph">
+                                    </canvas>
+                                    <p>La productividad de su empresa es x% mas productiva que el promedio nacional de empresas dedicadas a la mineria que radican en Chihuahua.</p>
+                                    <a href="#" class="btn btn-primary btn-lg btn-block">
+                                        <span>Comparte el calculo en tu red</span>
+                                        <span class="glyphicon glyphicon-arrow-right"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title">Comparte la calculadora en tu red:</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="3">Yo calcule mi productividad con esta excelente app, el resultado fue de 24% mas productivo que el promedio nacional. Descubre que tan productivo eres.</textarea>
+                                        </div>
+                                    </form>
+                                    <div class="text-center">
+                                        <p>Compartir via:</p>
+                                        <p>
+                                            <a class="text-hide" href="#">Facebook</a>
+                                            <a class="text-hide" href="#">Twitter</a>
+                                            <a class="text-hide" href="#">Email</a>
+                                        </p>
+                                    </div>
+                                    <a href="#" class="btn btn-primary btn-lg btn-block">
+                                        <span>Volver a calcular mi productividad</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container-fluid">
+                <div class="row hidden-xs" id="logos">
+                    <div class="col-sm-2 col-sm-offset-3">
+                        <a href="#" class="text-hide">uno</a>
+                    </div>                    
+                    <div class="col-sm-2"> 
+                        <a href="#" class="text-hide">dos</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="#" class="text-hide">tres</a>
+                    </div>
+                </div>
+                <p class="navbar-text" >2014 Todos los derechos reservados</p>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">
@@ -84,8 +334,8 @@
                             </a></li>
                     </ul>
                 </div>
-            </footer>
-        </section>
+            </div>
+        </footer>
         <script type="text/template" id="cp_template">
             <form id="cp_form" class="calculadora">
             <fieldset id="#cp_fs1">
