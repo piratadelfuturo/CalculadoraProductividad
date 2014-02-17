@@ -26,10 +26,12 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                     self.on({
                         "change:diasSemana change:horasDia": self.calculateHorasMes,
                         "change:salarioMes change:horasMes": self.calculateSalarioHora,
-                        "change:sector change:estudio": self.calculateSalarioComparado,
+                        "change:sector change:estudio change:promedio": self.calculateSalarioComparado,
                         "change:datos": self.calculatePromedio,
                         "change:salarioHora change:salarioComparado": self.calculateProductividad
                     });
+                    self.calculateHorasMes();
+                    self.calculateSalarioHora();
                 },
                 calculateHorasMes: function() {
                     var self = this,
@@ -54,8 +56,21 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                     self.set('salarioComparado', promedio[sector][estudio]);
                 },
                 calculateProductividad: function(){
-                    var self = this;
-                    self.set('productividad',self.get('salarioHora') / self.get('salarioComparado'));
+                    var self = this,
+                            side = 1,
+                    productividad = parseFloat(self.get('salarioHora') / self.get('salarioComparado'));
+                    productividad = isNaN(productividad) ||  productividad === Infinity? 0 : productividad.toFixed(2);
+                    if(productividad < 1){
+                        productividad = 1 - productividad;
+                        side = -1;
+                    }else if(productividad > 1){
+                        productividad = productividad - 1;                     
+                    }else{
+                        productividad = 0;
+                    }
+                    productividad = productividad * 100;
+                    productividad = Math.floor(parseFloat(productividad) * 100) * side;
+                    self.set('productividad', productividad );
                 },
                 loadData: function(s, e, d) {
                     var self = this,
@@ -79,7 +94,7 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                     });
 
                     self.set('opcionesEstudios', estudios);
-                    self.set('opcionesSectores', sectores);
+                    self.set('opcionesSectores', sectores);                    
                     self.set('datos', datos);
                     self.calculatePromedio();
                 },

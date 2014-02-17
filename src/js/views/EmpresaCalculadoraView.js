@@ -1,165 +1,96 @@
-define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gagauge'], function(backbone, _, EmpresaCalculadora, $, Gagauge) {
+define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gagauge', 'mexico_paths', 'raphael',  'graphael'], function(backbone, _, EmpresaCalculadora, $, Gagauge, mexico_paths, Raphael) {
     var EmpresaCalculadoraView = Backbone.View.extend({
-        dataUrls: {
-            opcionesSectoresUrl: './data/empresas/sectores',
-            opcionesEstadosUrl: './data/empresas/estados',
-            datosUrl: './data/empresas/datos'
-        },
-        model: new EmpresaCalculadora(),
-        gauge: null,
-        initialize: function() {
+        tagName: "div",
+        id: "ce_view",
+        model: EmpresaCalculadora,
+        initialize: function(opts) {
             var self = this;
+            self.$container = opts.container;
             self.render();
         },
-        loadOptions: function(callback, error) {
-            callback = !callback ? function() {
-            } : callback;
-            error = !error ? function() {
-                throw "invalid data"
-            } : error;
-
-            var self = this,
-                    estadosRequest = $.ajax({
-                        url: self.dataUrls.opcionesEstadosUrl,
-                        dataType: 'text',
-                    }),
-                    sectoresRequest = $.ajax({
-                        url: self.dataUrls.opcionesSectoresUrl,
-                        dataType: 'text',
-                    });
-            $.when(sectoresRequest, estadosRequest).then(function(sectores, estados) {
-                self.model.set("opcionesSectores", sectores[0].split("\n"));
-                self.model.set("opcionesEstados", _.map(estados[0].split("\n"), function(o) {
-                    return o.split("\t")[1]
-                }));
-                callback.apply(self, self.model.get("opcionesSectores"), self.model.get("opcionesEstados"));
-            }, function(e) {
-                if (!error) {
-                    throw "datos no disponibles";
-                } else {
-                    error.apply(e, this);
-                }
-            });
-
-        },
-        loadData: function(callback) {
-            callback = !callback ? function() {
-            } : callback;
-            var self = this,
-                    val = parseInt(self.model.get("estado")) + 1,
-                    datosRequest = $.ajax({
-                        url: self.dataUrls.datosUrl + '/' + val,
-                        dataType: 'text',
-                        success: function(m) {
-                            self.model.loadData(m);
-                            callback.apply(self);
-                        },
-                        error: function() {
-                            throw "no data";
-                        }
-                    });
+        events: {
+            "click #ce_form_element_submit": "showProductivity",
+            "click #ce_result_sharebtn": "showShare"
         },
         render: function() {
-            var self = this,
-                    el = self.$el,
-                    template = _.template($("#ce_template").html(), {});
-            el.html(template);
-            var estadosSelect = $("#ce_residencia", el).empty(),
-                    sectoresSelect = $("#ce_sector", el).empty(),
-                    trabajadoresInput = $("#ce_trabajadores", el),
-                    produccionInput = $("#ce_produccion", el),
-                    productividadEmpresaInput = $('#ce_productividad_empresa',el),
-                    productividadSectorInput =  $('#ce_productividad_sector',el);
-
-            productividadEmpresaInput.val(self.model.get("productividad"));
-            productividadSectorInput.val(self.model.get("productividadComparada"));  
-
-            trabajadoresInput.val(self.model.get("totalTrabajadores")).change(function() {
-                var trab = parseInt(trabajadoresInput.val());
-                trabajadoresInput.val(trab);
-                self.model.set("totalTrabajadores", trab);
-            });
-            produccionInput.val(self.model.get("produccionAnual")).change(function() {
-                var prod = parseFloat($(produccionInput).val()).toFixed(2);
-                $(produccionInput).val(prod);
-                self.model.set("produccionAnual", prod);
-            });
-            
-            self.listenTo(self.model, "change:productividad", function() {
-                productividadEmpresaInput.val(self.model.get("productividad"));
-                });
-
-            self.listenTo(self.model, "change:productividadComparada", function() {
-                productividadSectorInput.val(self.model.get("productividadComparada"));
-            });
-
-            
-            self.loadOptions(function() {
-                
-                var estados = self.model.get("opcionesEstados"),
-                    sectores = self.model.get("opcionesSectores");
-                
-                self.listenTo(self.model, "change:estado", function() {
-                    self.loadData()
-                });
-
-                $(estadosSelect).on("change select DOMSubtreeModified", function() {
-                    var value = $(estadosSelect).val();
-                    if (value !== '') {
-                        self.model.set("estado", value);
-                    }
-                });
-                $(sectoresSelect).on("select change DOMSubtreeModified", function() {
-                    var value = $(sectoresSelect).val();
-                    if (value !== '') {
-                        self.model.set("sector", value);
-                    }
-                });
-                _.each(estados, function(text, i) {
-                    estadosSelect.append($("<option></option>").val(i).text(text));
-                });
-                _.each(sectores, function(text, i) {
-                    sectoresSelect.append($("<option></option>").val(i).text(text));
-                });
-                
-                self.listenTo(self.model, "change", self.updateValues);
-                self.renderGauge();
-                self.updateValues();
-            });
+            var self = this, template = _.template($("#ce_main_template").html(), {});
+            self.$container.append(self.$el);
+            self.$el.html(template).addClass('container-fluid');
+            return this;
         },
-        updateValues: function(x) {
+        renderMap: function() {
             var self = this,
-                    el = this.$el,
-                    productividad = self.model.get('productividad')/self.model.get('productividadComparada'),
-                    color = '#66FF99', bgcolor = '#fff', side = 1;
-            if (productividad < 1) {
-                productividad = 1 - productividad;
-                color = '#FF3366';
-                bgcolor = '#000';
-                side = -1;
-            } else if (productividad > 1) {
-                productividad = productividad - 1;
-                color = '#66FF99';
-                bgcolor = '#fff';
-                side = 1;
-            } else {
-                productividad = 0;
-                color = '#000';
-                bgcolor = '#000';
-                side = 1;
+                    paths = mexico_paths,
+                    container = $('#ce_estado_map',this.$el),
+                    r = null;
+            this.r = Raphael(container[0]);
+            r = this.r;
+            r.setViewBox(0,0,650,450,true);
+            r.safari();            
+            var _label = r.popup(50, 50, "").hide();
+            var attributes = {
+                fill: '#485e96',
+                stroke: '#1e336a',
+                'stroke-width': 1.5,
+                'stroke-linejoin': 'round'
+            };
+            var arr = new Array();
+            for (var correntPath in paths) {
+                var obj = r.path(paths[correntPath].path);
+                arr[obj.id] = correntPath;
+                obj.attr(attributes);
+                obj.hover(function() {
+                    this.animate({
+                        fill: '#733A6A',
+                        stroke: '#1F131D'
+                    }, 300);
+                    var bbox = this.getBBox();
+                    _label.attr({
+                        text: paths[arr[this.id]].name}).update(bbox.x, bbox.y + bbox.height / 2, bbox.width).toFront().show();
+                }, function() {
+                    this.animate({
+                        fill: attributes.fill,
+                        stroke: attributes.stroke
+                    }, 300);
+                    _label.hide();
+                });
+                obj.click(function() {
+                    //location.href = paths[arr[this.id]].url;
+                });
             }
-
-            productividad = productividad * 100;
-            productividad = parseFloat(productividad).toFixed(2);
-
-            self.gauge.set(Math.round(productividad * side));
-            self.gauge.color(color, bgcolor);
         },
-        renderGauge: function() {
-            var self = this;
-            var gauge = new Gagauge($('#ce_gauge', self.$el)[0]); // create sexy gauge!
-            gauge.set(0); // set actual value
-            self.gauge = gauge;
+        removeMap: function(){
+            this.r && (this.r.remove && this.r.remove());
+        },
+        close: function(){
+            this.removeMap();
+            this.remove();
+        },
+        hidePanels: function() {
+            $('.panel', this.$el).addClass('hidden');
+            this.removeMap();
+        },
+        showEstado: function(){
+            this.hidePanels();
+            $('#ce_estado', this.$el).removeClass('hidden').addClass('visible');
+            this.renderMap();
+        },
+        showForm: function(estado){
+            this.hidePanels();
+            $('#ce_form', this.$el).removeClass('hidden').addClass('visible');            
+        },
+        showProductivity: function() {
+            this.hidePanels();
+            $('#ce_result', this.$el).removeClass('hidden').addClass('visible');
+        },
+        showShare: function(e) {
+            e.preventDefault();
+            this.hidePanels();
+            $('#ce_share', this.$el).removeClass('hidden').addClass('visible');
+        },
+        showForm: function() {
+
+
         }
     });
     return EmpresaCalculadoraView;

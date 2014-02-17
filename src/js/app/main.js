@@ -5,9 +5,16 @@ requirejs.config(
                 "bootstrap": "../libs/bootstrap.min",
                 "jquery": "../libs/jquery-2.1.0.min",
                 "backbone": "../libs/backbone-min",
-                "gagauge": "../libs/gagauge"
+                "gagauge": "../libs/gagauge",
+                "mexico_paths": "../libs/mexico_paths",
+                "raphael": '../libs/raphael-min',
+                "graphael": "../libs/g.raphael-min",
             },
             shim: {
+                "graphael":[ 'raphael' ],
+                "mexico_paths": {
+                    exports: "mexico_paths"
+                },
                 "underscore": {
                     exports: "_"
                 },
@@ -31,6 +38,6 @@ requirejs.config(
 
 
 
-require(['../app/app', ], function(App) {
+requirejs(['../app/app', ], function(App) {
     App.initialize();
 });

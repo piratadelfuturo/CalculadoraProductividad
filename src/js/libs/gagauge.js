@@ -78,10 +78,12 @@ define(['jquery'], function($) {
         function animate_to()
         {
             //clear animation loop if degrees reaches to new_degrees
-            if (degrees == new_degrees)
+            if (degrees == new_degrees){
                 clearInterval(animation_loop);
+                delete animation_loop;
+            }
 
-            if (degrees < new_degrees)
+            if (degrees <= new_degrees)
                 degrees++;
             else
                 degrees--;
