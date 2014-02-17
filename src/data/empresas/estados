@@ -1,33 +1,33 @@
-0	NACIONAL    nacional
-1	AGUASCALIENTES  aguascalientes
-2	BAJA CALIFORNIA baja-california
-3	BAJA CALIFORNIA SUR baja-california-sur
-4	CAMPECHE    campeche
-5	COAHUILA    coahuila
-6	COLIMA  colima
-7	CHIAPAS chiapas
-8	CHIHUAHUA   chihuahua
-9	DISTRITO FEDERAL    df
-10	DURANGO durango
-11	GUANAJUATO  guanajuato
-12	GUERRERO    guerrero
-13	HIDALGO hidalgo
-14	JALISCO jalisco
-15	MÉXICO  mexico
-16	MICHOACÁN   michoacan
-17	MORELOS morelos
-18	NAYARIT nayarit
-19	NUEVO LEON  nuevo-leon
-20	OAXACA  oaxaca
-21	PUEBLA  puebla
-22	QUERÉTARO   queretaro
-23	QUINTANA ROO    quintana-roo
-24	SAN LUIS POTOSI san-luis-potosi
-25	SINALOA sinaloa
-26	SONORA  sonora
-27	TABASCO tabasco
-28	TAMAULIPAS  tamaulipas
-29	TLAXCALA    tlaxcala
-30	VERACRUZ    veracruz
-31	YUCATÁN     yucatan
-32	ZACATECAS   zacatecas
+{"nacional":{id:0,name:"NACIONAL"},
+"aguascalientes":{id:1,name:"AGUASCALIENTES"},
+"baja-california":{id:2,name:"BAJA CALIFORNIA"},
+"baja-california-sur":{id:3,name:"BAJA CALIFORNIA SUR"},
+"campeche":{id:4,name:"CAMPECHE"},
+"coahuila":{id:5,name:"COAHUILA"},
+"colima":{id:6,name:"COLIMA"},
+"chiapas":{id:7,name:"CHIAPAS"},
+"chihuahua":{id:8,name:"CHIHUAHUA"},
+"df":{id:9,name:"DISTRITO FEDERAL"},
+"durango":{id:10,name:"DURANGO"},
+"guanajuato":{id:11,name:"GUANAJUATO"},
+"guerrero":{id:12,name:"GUERRERO"},
+"hidalgo":{id:13,name:"HIDALGO"},
+"jalisco":{id:14,name:"JALISCO"},
+"ÉXICO	mexico":{id:15,name:"M"},
+"ÁN	michoacan":{id:16,name:"MICHOAC"},
+"morelos":{id:17,name:"MORELOS"},
+"nayarit":{id:18,name:"NAYARIT"},
+"nuevo-leon":{id:19,name:"NUEVO LEON"},
+"oaxaca":{id:20,name:"OAXACA"},
+"puebla":{id:21,name:"PUEBLA"},
+"ÉTARO	queretaro":{id:22,name:"QUER"},
+"quintana-roo":{id:23,name:"QUINTANA ROO"},
+"san-luis-potosi":{id:24,name:"SAN LUIS POTOSI"},
+"sinaloa":{id:25,name:"SINALOA"},
+"sonora":{id:26,name:"SONORA"},
+"tabasco":{id:27,name:"TABASCO"},
+"tamaulipas":{id:28,name:"TAMAULIPAS"},
+"tlaxcala":{id:29,name:"TLAXCALA"},
+"veracruz":{id:30,name:"VERACRUZ"},
+"ÁN	yucatan":{id:31,name:"YUCAT"},
+"zacatecas":{id:32,name:"ZACATECAS"}}

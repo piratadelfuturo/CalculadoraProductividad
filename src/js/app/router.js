@@ -15,11 +15,10 @@ define([
             "initial":InitialCalculadoraView
         },
         routes: {
-            '': 'loader',
             'personas/': 'showPersonaCalculadora',
             'empresas/': 'showEmpresaCalculadora',
             'empresas/*estado': 'showEmpresaCalculadoraEstado',
-            '*actions': 'defaultAction'
+            '*actions': 'loader'
         },
         loadView: function(name,opts){
             var base = $('#container'), view = null;
