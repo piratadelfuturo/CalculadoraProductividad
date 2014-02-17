@@ -9,8 +9,12 @@ requirejs.config(
                 "mexico_paths": "../libs/mexico_paths",
                 "raphael": '../libs/raphael-min',
                 "graphael": "../libs/g.raphael-min",
+                'facebook': '//connect.facebook.net/en_US/all'
             },
             shim: {
+                'facebook' : {
+                    exports: 'FB'
+                },
                 "graphael":[ 'raphael' ],
                 "mexico_paths": {
                     exports: "mexico_paths"
@@ -38,6 +42,6 @@ requirejs.config(
 
 
 
-requirejs(['../app/app', ], function(App) {
+requirejs(['../app/app' ], function(App) {
     App.initialize();
 });

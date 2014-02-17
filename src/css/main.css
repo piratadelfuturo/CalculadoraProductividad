@@ -35,7 +35,7 @@
 
     }
     
-    #ce_estado_map{
+    .map-box{
         display: inline-block;
         position: relative;
         width: 100%;
@@ -44,7 +44,7 @@
         overflow: hidden;
     }
 
-    #ce_estado_map > svg{
+    .map-box > svg{
         display: inline-block;
         position: absolute !important;
         top: 0;
@@ -53,13 +53,10 @@
         height: 100%;
     }
     
-    #cp_result_graph{
-    }
-
 }
 
 /*Custom font for numbers*/
 @font-face{
     font-family: "bebas";
-    src: url("http://thecodeplayer.com/uploads/fonts/BebasNeue.otf");
+    src: url("/fonts/BebasNeue.otf");
 }

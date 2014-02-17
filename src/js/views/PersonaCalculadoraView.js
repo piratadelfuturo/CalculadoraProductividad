@@ -122,7 +122,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                     text = '',
                     estudio = '';
             
-            $('#cp_result .cp_result_text_sector', this.$el).text(opcionesSectores[self.model.get('sector')]);
+            $('#cp_result .c-result-text-sector', this.$el).text(opcionesSectores[self.model.get('sector')]);
             
             if(self.model.get('estudio') == 1){
                 estudio = ' con un nivel de educacion de '+opcionesEstudios[self.model.get('estudio')];
@@ -130,8 +130,8 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                 estudio = ' con cualquier nivel de educacion.';
             }
             
-            $('#cp_result p .cp_result_text_estudio', this.$el).text(estudio);
-            $('#cp_result li .cp_result_text_estudio', this.$el).text(opcionesEstudios[self.model.get('estudio')]);
+            $('#cp_result p .c-result-text-estudio', this.$el).text(estudio);
+            $('#cp_result li .c-result-text-estudio', this.$el).text(opcionesEstudios[self.model.get('estudio')]);
 
             prod = self.model.get('productividad');
             text = prod+'% ';
@@ -143,8 +143,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                 text = 'igual de ';
             }
             
-            $('#cp_result .cp_result_text_prod', this.$el).text(text);            
-
+            $('#cp_result .c-result-text-prod', this.$el).text(text);            
             
             this.renderGauge();
             this.updateGauge();            
@@ -164,8 +163,14 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                 text = 'igual de ';
             }
             
+            $('#cp_share .c-share-text-prod',this.$el).text(text);
             
-            $('#cp_share #cp_share_text_prod',this.$el).text(text)
+            var shareText = $('#cp_share div.well' , this.$el ).text().trim();
+            shareText = encodeURIComponent(shareText)+": "+window.location;
+            $('#cp_share .c-share-link-em', this.$el).attr('href','mailto:?to=&subject=calculadora%20de%20productividad&body='+shareText);
+            $('#cp_share .c-share-link-fb', this.$el).attr('href','http://www.facebook.com/sharer/sharer.php?u='+window.location);
+            $('#cp_share .c-share-link-tw', this.$el).attr('href','http://twitter.com/home?status='+shareText);
+            
         },
         renderGauge: function() {
             var gauge = new Gagauge($('#cp_result canvas',this.$el)[0]); // create sexy gauge!

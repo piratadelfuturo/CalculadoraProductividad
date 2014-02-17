@@ -3,6 +3,7 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
         tagName: "div",
         id: "ce_view",
         model: EmpresaCalculadora,
+        r: [],
         initialize: function(opts) {
             var self = this;
             self.$container = opts.container;
@@ -59,21 +60,85 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
                 });
             }
         },
-        removeMap: function(){
-            this.r && (this.r.remove && this.r.remove());
+        renderMapEstados: function() {
+            var self = this,
+                    paths = mexico_paths,
+                    container = $('#ce_estado_map_estados',this.$el),
+                    r = null;
+            r = Raphael(container[0]);
+            this.r.push(r);
+            r.setViewBox(0,0,650,450,true);
+            r.safari();            
+            var attributes = {
+                fill: '#485e96',
+                stroke: '#1e336a',
+                'stroke-width': 1.5,
+                'stroke-linejoin': 'round'
+            };
+            var arr = new Array();
+            for (var correntPath in paths) {
+                var obj = r.path(paths[correntPath].path);
+                arr[obj.id] = correntPath;
+                obj.attr(attributes);
+                obj.hover(function() {
+                    this.animate({
+                        fill: '#733A6A',
+                        stroke: '#1F131D'
+                    }, 300);
+                }, function() {
+                    this.animate({
+                        fill: attributes.fill,
+                        stroke: attributes.stroke
+                    }, 300);
+                });
+                obj.click(function() {
+                    //location.href = paths[arr[this.id]].url;
+                });
+            }
+        },
+        renderMapFull: function() {
+            var self = this,
+                    paths = mexico_paths,
+                    container = $('#ce_estado_map_full',this.$el),
+                    r = null;
+            r = Raphael(container[0]);
+            this.r.push(r);
+            r.setViewBox(0,0,650,450,true);
+            r.safari();            
+            var attributes = {
+                fill: '#1e336a',
+                stroke: '#1e336a',
+                'stroke-width': 2,
+                'stroke-linejoin': 'round'
+            };
+            var arr = new Array();
+            for (var correntPath in paths) {
+                var obj = r.path(paths[correntPath].path);
+                arr[obj.id] = correntPath;
+                obj.attr(attributes);                
+                obj.click(function() {
+                    //location.href = paths[arr[this.id]].url;
+                });
+            }
+        },
+        removeMaps: function(){
+            _.map(this.r,function(r){
+                r && (r.remove && r.remove());                
+            })
         },
         close: function(){
-            this.removeMap();
+            this.removeMaps();
             this.remove();
         },
         hidePanels: function() {
             $('.panel', this.$el).addClass('hidden');
-            this.removeMap();
+            this.removeMaps();
         },
         showEstado: function(){
             this.hidePanels();
             $('#ce_estado', this.$el).removeClass('hidden').addClass('visible');
-            this.renderMap();
+            this.renderMapEstados();
+            this.renderMapFull()
         },
         showForm: function(estado){
             this.hidePanels();

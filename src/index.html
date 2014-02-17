@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.icon-large.min.css" rel="stylesheet">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -87,7 +88,7 @@
         </script>
         <script type="text/template" id="ce_main_template">
             <div class="row calculadora" id="ce_block">
-                <ul class="list-group col-sm-2 text-center hidden-xs">
+                <ul class="list-group col-sm-2 text-center hidden-xs hidden-sm">
                     <li class="list-group-item">
                         <a href="#">
                             <span class="glyphicon glyphicon-home"></span><br>
@@ -111,31 +112,26 @@
                         <span class="glyphicon-class">Comparte</span>
                     </li>
                 </ul>
-                <div class="col-sm-10">
+                <div class="col-md-10">
                     <div class="row">
                         <div class="col-sm-10  col-sm-offset-1">
                             <div class="panel panel-default hidden" id="ce_estado">
                                 <div class="panel-heading">
                                     <h2 class="panel-title">Porfavor indica donde reside tu empresa:</h2>
                                 </div>
-                                <div class="panel-body text-center hidden-sm">
+                                <div class="panel-body text-center hidden-xs">
                                     <div class="col-xs-6">
                                         <h4>ESTADO</h4>
-                                        <div id="ce_estado_map"></div>
-                                        <p>
-                                            Selecciona esta opcion si tu empresa opera en un solo estado  
-                                        </p>
+                                        <div class="map-box" id="ce_estado_map_estados"></div>
+                                        <p>Selecciona esta opcion si tu empresa opera en un solo estado</p>
                                     </div>
                                     <div class="col-xs-6">
                                         <h4>NACIONAL/ INTERTESTATAL</h4>
-                                        <canvas>
-                                        </canvas>
-                                        <p>
-                                            Selecciona esta opcion si tu empresa opera en dos o mas estados
-                                        </p>
+                                         <div class="map-box" id="ce_estado_map_full"></div>
+                                       <p>Selecciona esta opcion si tu empresa opera en dos o mas estados</p>
                                     </div>
                                 </div>
-                                <div class="panel-body text-center visible-sm">
+                                <div class="panel-body text-center visible-xs">
                                     <div class="col-xs-12">
                                         <form class="form-horizontal" role="form">
                                             <div class="form-group">
@@ -185,16 +181,15 @@
                                     <h2 class="panel-title">El resultado de la calculadora es:</h2>
                                 </div>
                                 <div class="panel-body">
-                                    <ul>
+                                    <ul id="" class="pull-right c-result-data">
                                         <li><span class="glyphicon glyphicon-th-large" ></span>
-                                            <span>Comercio</span></li>
+                                            <span class="c-result-text-sector"></span></li>
                                         <li><span class="glyphicon glyphicon-book" ></span>
-                                            <span>Chihuahua</span></li>
+                                            <span class="c-result-text-estudio"></span></li>
                                     </ul>
-                                    <canvas id="calculadora-persona-graph">
-                                    </canvas>
-                                    <p>La productividad de su empresa es x% mas productiva que el promedio nacional de empresas dedicadas a la mineria que radican en Chihuahua.</p>
-                                    <a href="#" class="btn btn-primary btn-lg btn-block" id="ce_result_sharebtn">
+                                    <canvas width="300" height="300" class="center-block c-result-graph"></canvas>
+                                    <p class="c-result-text">La productividad de su empresa es <span class="c-result-text-prod"></span> productiva que el promedio nacional de empresas en el sector de <span class="c-result-text-sector" ></span>, que radican <span class="c-result-text-estado"></span></p>
+                                    <a href="" class="btn btn-primary btn-lg btn-block" id="cp_result_sharebtn">
                                         <span>Comparte el calculo en tu red</span>
                                         <span class="glyphicon glyphicon-arrow-right"></span>
                                     </a>
@@ -205,17 +200,24 @@
                                     <h2 class="panel-title">Comparte la calculadora en tu red:</h2>
                                 </div>
                                 <div class="panel-body">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="3">Yo calcule mi productividad con esta excelente app, el resultado fue de 24% mas productivo que el promedio nacional. Descubre que tan productivo eres.</textarea>
-                                        </div>
-                                    </form>
+                                    <div class="well well-sm">
+                                        <p>Yo calcule mi productividad con esta excelente app, el resultado fue de <span class="c-share-text-prod">24% mas</span> productivo que el promedio nacional. Descubre que tan productivo eres.</textarea>
+                                    </div>
                                     <div class="text-center">
                                         <p>Compartir via:</p>
                                         <p>
-                                            <a class="text-hide" href="#">Facebook</a>
-                                            <a class="text-hide" href="#">Twitter</a>
-                                            <a class="text-hide" href="#">Email</a>
+                                            <a class="btn btn-default btn-lg share-link-fb" href="#" target="_blank" >
+                                                <span class="icon-large icon-facebook" ></span>
+                                                <span class="">Facebook</span>
+                                            </a>
+                                            <a class="btn btn-default btn-lg share-link-tw" href="#" target="_blank" >
+                                                <span class="icon-large icon-twitter" ></span>
+                                                <span class="">Twitter</span>
+                                            </a>
+                                            <a class="btn btn-default btn-lg share-lin-em" href="#" target="_blank" >
+                                                <span class="icon-large icon-envelope" ></span>
+                                                <span class="">Email</span>
+                                            </a>
                                         </p>
                                     </div>
                                     <a href="#" class="btn btn-primary btn-lg btn-block">
@@ -311,14 +313,14 @@
                                     <h2 class="panel-title">El resultado de la calculadora es:</h2>
                                 </div>
                                 <div class="panel-body">
-                                    <ul id="cp_result_data" class="pull-right">
+                                    <ul class="pull-right c-result-data">
                                         <li><span class="glyphicon glyphicon-th-large" ></span>
-                                            <span class="cp_result_text_sector"></span></li>
+                                            <span class="c-result-text-sector"></span></li>
                                         <li><span class="glyphicon glyphicon-book" ></span>
-                                            <span class="cp_result_text_estudio"></span></li>
+                                            <span class="c-result-text-estudio"></span></li>
                                     </ul>
-                                    <canvas id="cp_result_graph" width="300" height="300" class="center-block"></canvas>
-                                    <p id="cp_result_text">Eres <span class="cp_result_text_prod"></span> productivo que el promedio nacional de las personas que trabajan en <span class="cp_result_text_sector" ></span>, <span class="cp_result_text_estudio"></span></p>
+                                    <canvas width="300" height="300" class="center-block c-result-graph"></canvas>
+                                    <p class="c-result-text">Eres <span class="c-result-text-prod"></span> productivo que el promedio nacional de las personas que trabajan en <span class="c-result-text-sector" ></span>, <span class="c-result-text-estudio"></span></p>
                                     <a href="" class="btn btn-primary btn-lg btn-block" id="cp_result_sharebtn">
                                         <span>Comparte el calculo con tus amigos</span>
                                         <span class="glyphicon glyphicon-arrow-right"></span>
@@ -331,14 +333,23 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="well well-sm">
-                                        <p>Yo calcule mi productividad con esta excelente app, el resultado fue de <span class="cp_share_text_prod">24% mas</span> productivo que el promedio nacional. Descubre que tan productivo eres.</textarea>
+                                        <p>Yo calcule mi productividad con esta excelente app, el resultado fue de <span class="c-share-text-prod">24% mas</span> productivo que el promedio nacional. Descubre que tan productivo eres.</textarea>
                                     </div>
                                     <div class="text-center">
                                         <p>Compartir via:</p>
                                         <p>
-                                            <a class="text-hide" href="#">Facebook</a>
-                                            <a class="text-hide" href="#">Twitter</a>
-                                            <a class="text-hide" href="#">Email</a>
+                                            <a class="btn btn-default btn-lg share-link-fb" href="#" target="_blank" >
+                                                <span class="icon-large icon-facebook" ></span>
+                                                <span class="">Facebook</span>
+                                            </a>
+                                            <a class="btn btn-default btn-lg share-link-tw" href="#" target="_blank" >
+                                                <span class="icon-large icon-twitter" ></span>
+                                                <span class="">Twitter</span>
+                                            </a>
+                                            <a class="btn btn-default btn-lg share-lin-em" href="#" target="_blank" >
+                                                <span class="icon-large icon-envelope" ></span>
+                                                <span class="">Email</span>
+                                            </a>
                                         </p>
                                     </div>
                                     <a href="#" class="btn btn-primary btn-lg btn-block">
