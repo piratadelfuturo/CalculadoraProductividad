@@ -18,11 +18,11 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                 initialize: function() {
                     var self = this;
                     Calculadora.prototype.initialize.apply(this, arguments);
-                    self.calculateProductividad();
                     self.on({
                         "change:produccionAnual change:totalTrabajadores": self.calculateProductividad,
                         "change:sector": self.calculateProductividadComparada,
-                        "change:datos": self.calculateProductividadComparada
+                        "change:datos": self.calculateProductividadComparada,
+                        "change:productividadComparada": self.calculateProductividad
                     });
                 },
                 calculateProductividadComparada: function() {

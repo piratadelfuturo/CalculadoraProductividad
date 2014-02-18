@@ -224,8 +224,12 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
                     estadoText = '';
             
             $('#ce_result .c-result-text-sector', this.$el).text(opcionesSectores[self.model.get('sector')]);
+            var estados = {};
+            _.map(self.estados,function(o,i){
+                estados[o.id] = o.name;
+            });
             
-            estadoText = self.estados[estado].name
+            estadoText = estados[estado];
             
             $('#ce_result .c-result-text-estado', this.$el).text(estadoText);
 
