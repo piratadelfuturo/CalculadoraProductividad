@@ -186,6 +186,7 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
         hidePanels: function() {
             $('.panel', this.$el).addClass('hidden');
             this.removeMaps();
+            delete this.gauge;
         },
         showEstado: function() {
             var self = this;
@@ -248,10 +249,30 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
             this.renderGauge();
             this.updateGauge(); 
         },
-        showShare: function(e) {
+        showShare: function(e){
+            var self = this;
             e.preventDefault();
             this.hidePanels();
-            $('#ce_share', this.$el).removeClass('hidden').addClass('visible');
+            $('#ce_share', self.$el).removeClass('hidden').addClass('visible');
+            var prod = self.model.get('productividad');
+            var text = prod+'% ';
+            if(prod < 0){
+                text += 'menos ';
+            }else if(prod > 0){
+                text += 'mas ';
+            }else{
+                text = 'igual de ';
+            }
+            
+            $('#ce_share .c-share-text-prod',this.$el).text(text);
+            
+            var shareText = $('#ce_share div.well' , this.$el ).text().trim();
+            shareText = encodeURIComponent(shareText)+": "+window.location;
+            console.log($('#ce_share .c-share-link-em', self.$el));
+            $('#ce_share .c-share-link-em', self.$el).attr('href','mailto:?to=&subject=calculadora%20de%20productividad&body='+shareText);
+            $('#ce_share .c-share-link-fb', self.$el).attr('href','http://www.facebook.com/sharer/sharer.php?u='+window.location);
+            $('#ce_share .c-share-link-tw', self.$el).attr('href','http://twitter.com/home?status='+shareText);
+            
         },
         renderGauge: function() {
             var gauge = new Gagauge($('#ce_result canvas',this.$el)[0]); // create sexy gauge!

@@ -8,7 +8,7 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                             sector: 0,
                             produccionAnual: 150000000.00,
                             totalTrabajadores: 1000,
-                            productividad: 0.0,
+                            productividadEmpresa: 0.0,
                             productividadComparada: 0.0,
                             opcionesSectores: [''],
                             opcionesConceptos:[''],
@@ -18,11 +18,12 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                 initialize: function() {
                     var self = this;
                     Calculadora.prototype.initialize.apply(this, arguments);
+                    self.calculateProductividadEmpresa();
                     self.on({
-                        "change:produccionAnual change:totalTrabajadores": self.calculateProductividad,
+                        "change:produccionAnual change:totalTrabajadores": self.calculateProductividadEmpresa,
                         "change:sector": self.calculateProductividadComparada,
                         "change:datos": self.calculateProductividadComparada,
-                        "change:productividadComparada": self.calculateProductividad
+                        "change:productividadEmpresa change:productividadComparada": self.calculateProductividad
                     });
                 },
                 calculateProductividadComparada: function() {
@@ -37,11 +38,29 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                         self.set('productividadComparada', parseFloat((comparada)*1000).toFixed(2));
                     }
                 },
-                calculateProductividad: function(){
+                calculateProductividadEmpresa: function(){
                     var self = this,
                             prod = parseFloat(self.get('produccionAnual') / self.get('totalTrabajadores')).toFixed(2);
                     
-                    self.set('productividad',prod);
+                    self.set('productividadEmpresa',prod);
+                },
+                calculateProductividad: function(){
+                    var self = this,
+                            side = 1,
+                    productividad = parseFloat(self.get('productividadEmpresa') / self.get('productividadComparada'));
+                    productividad = isNaN(productividad) ||  productividad === Infinity? 0 : productividad.toFixed(2);
+                    console.log(productividad, self.get('productividadEmpresa'), self.get('productividadComparada'));
+                    if(productividad < 1){
+                        productividad = 1 - productividad;
+                        side = -1;
+                    }else if(productividad > 1){
+                        productividad = productividad - 1;                     
+                    }else{
+                        productividad = 0;
+                    }
+                    productividad = productividad * 100;
+                    productividad = Math.floor(parseFloat(productividad) * 100) * side;
+                    self.set('productividad', productividad );
                 },
                 loadData: function(d) {
                     var self = this,
