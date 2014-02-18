@@ -6,7 +6,6 @@ requirejs.config(
                 "jquery": "../libs/jquery-2.1.0.min",
                 "backbone": "../libs/backbone-min",
                 "gagauge": "../libs/gagauge",
-                "mexico_paths": "../libs/mexico_paths",
                 "raphael": '../libs/raphael-min',
                 "graphael": "../libs/g.raphael-min",
                 'facebook': '//connect.facebook.net/en_US/all'
@@ -16,15 +15,11 @@ requirejs.config(
                     exports: 'FB'
                 },
                 "graphael":[ 'raphael' ],
-                "mexico_paths": {
-                    exports: "mexico_paths"
-                },
                 "underscore": {
                     exports: "_"
                 },
                 "bootstrap": {
-                    deps: ["jquery"],
-                    exports: "$.fn.popover"
+                    deps: ["jquery"]
                 },
                 "backbone": {
                     deps: ["underscore", "jquery"],

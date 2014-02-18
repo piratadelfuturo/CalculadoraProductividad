@@ -27,6 +27,7 @@ define([
                 var oldView = this.view;
                 delete oldView;
                 this.view = new this.views[name]({container:base});
+                this.view.app = this;
             }
 
             return this.view;            

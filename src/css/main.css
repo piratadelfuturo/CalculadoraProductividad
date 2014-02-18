@@ -58,5 +58,5 @@
 /*Custom font for numbers*/
 @font-face{
     font-family: "bebas";
-    src: url("fonts/BebasNeue.otf");
+    src: url("../fonts/BebasNeue.otf");
 }
