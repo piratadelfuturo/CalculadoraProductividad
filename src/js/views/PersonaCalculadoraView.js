@@ -167,9 +167,10 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             
             var shareText = $('#cp_share div.well' , this.$el ).text().trim();
             shareText = encodeURIComponent(shareText)+": "+window.location;
-            $('#cp_share .c-share-link-em', this.$el).attr('href','mailto:?to=&subject=calculadora%20de%20productividad&body='+shareText);
-            $('#cp_share .c-share-link-fb', this.$el).attr('href','http://www.facebook.com/sharer/sharer.php?u='+window.location);
-            $('#cp_share .c-share-link-tw', this.$el).attr('href','http://twitter.com/home?status='+shareText);
+            console.log($('#cp_share .c-share-link-em', self.$el));
+            $('#cp_share .c-share-link-em', self.$el).attr('href','mailto:?to=&subject=calculadora%20de%20productividad&body='+shareText);
+            $('#cp_share .c-share-link-fb', self.$el).attr('href','http://www.facebook.com/sharer/sharer.php?u='+window.location);
+            $('#cp_share .c-share-link-tw', self.$el).attr('href','http://twitter.com/home?status='+shareText);
             
         },
         renderGauge: function() {
