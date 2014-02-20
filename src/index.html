@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html lang="es">
     <head>
         <title>Calculadora de Productividad 2014</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap.icon-large.min.css" rel="stylesheet">
@@ -19,14 +22,14 @@
         <header class="navbar navbar-default navbar-static-top" >
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand">#M&aacute;sProductivoParaVivirMejor</a>
+                    <a class="navbar-brand">#ParaSerM&aacute;sProductivo</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li> <a href="#">
+                        <li> <a href="#" class="icon facebook">
                                 Facebook
                             </a> </li>
-                        <li> <a href="#">
+                        <li> <a href="#" class="icon twitter">
                                 Twitter
                             </a></li>
                     </ul>
@@ -38,13 +41,13 @@
             <div class="container-fluid">
                 <div class="row hidden-xs" id="logos">
                     <div class="col-sm-2 col-sm-offset-3">
-                        <a href="#" class="text-hide">uno</a>
+                        <a href="http://mexicocomovamos.com/" target="_blank" class="mcv-ico">¿México Cómo Vamos?</a>
                     </div>                    
                     <div class="col-sm-2"> 
-                        <a href="#" class="text-hide">dos</a>
+                        <a href="http://imco.org.mx" target="_blank" class="imco-ico">Instituo Mexicano para la Competitividad A.C.</a>
                     </div>
                     <div class="col-sm-2">
-                        <a href="#" class="text-hide">tres</a>
+                        <a href="http://www.mexicoevalua.org/" target="_blank" class="evalua-ico">México EVALUA</a>
                     </div>
                 </div>
                 <p class="navbar-text" >2014 Todos los derechos reservados</p>
@@ -57,9 +60,9 @@
                                 Contacto
                             </a></li>
                         <li><a href="">
-                                Politicas de privacidad
+                                Políticas de privacidad
                             </a></li>
-                        <li><a href="">
+                           <li><a href="">
                                 Aviso legal
                             </a></li>
                     </ul>
@@ -74,12 +77,16 @@
                                     <h2 class="panel-title">¿Y tu eres productivo?</h2>
                                 </div>
                                 <div class="panel-body">
-                                    <p>Ser productivo es una actitud que busca el mejoramiento continuo. Es la conviccion de que las cosas se pueden hacer hoy mejor que ayer y que mañana mejor que hoy.</p>
-                                    <p>Existen muchas formas de medir la productividad, nosotros te presentamos una calculadora que permite visualizar el impacto directo de la productividad en tu economia dependiendo de tu profesion , sector o ubicacion geografica.</p>
+                                <div class="intro">
+                                    <p>Ser productivo es una actitud que busca el mejoramiento continuo. Es la convicción de que las cosas se pueden hacer hoy mejor que ayer y que mañana mejor que hoy.</p>
+                                    <p>Existen muchas formas de medir la productividad, nosotros te presentamos una calculadora que permite visualizar el impacto directo de la productividad en tu economía dependiendo de tu profesión , sector o ubicación geográfica.</p>
                                     <div class="text-center">
                                         <h4>Empieza a calcular tu productividad:</h4>
-                                        <a href="#/personas/">Personas</a>
-                                        <a href="#/empresas/">Empresas</a>
+                                    <div class="botones">
+                                        <a href="#/personas/" class="bpersonas">Personas</a>
+                                        <a href="#/empresas/" class="bempresas">Empresas</a>
+                                    </div>
+                                    </div>    
                                     </div>
                                 </div>
                     </div>
@@ -89,25 +96,25 @@
         <script type="text/template" id="ce_main_template">
             <div class="row calculadora" id="ce_block">
                 <ul class="list-group col-sm-2 text-center hidden-xs hidden-sm">
-                    <li class="list-group-item">
+                    <li class="list-group-item binicio">
                         <a href="#">
                             <span class="glyphicon glyphicon-home"></span><br>
                             <span class="glyphicon-class">Inicio</span>
                         </a>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item bresidencia">
                         <span class="glyphicon glyphicon-map-marker"></span><br>
                         <span class="glyphicon-class">Residencia</span>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item bformulario">
                         <span class="glyphicon glyphicon-list-alt"></span><br>
                         <span class="glyphicon-class">Formulario</span>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item bresultados">
                         <span class="glyphicon glyphicon-th-list"></span><br>
                         <span class="glyphicon-class">Resultados</span>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item bcomparte">
                         <span class="glyphicon glyphicon-star"></span><br>
                         <span class="glyphicon-class">Comparte</span>
                     </li>
@@ -117,19 +124,18 @@
                         <div class="col-sm-10  col-sm-offset-1">
                             <div class="panel panel-default hidden" id="ce_estado">
                                 <div class="panel-heading">
-                                    <h2 class="panel-title">Porfavor indica donde reside tu empresa:</h2>
+                                    <h2 class="panel-title">Por favor indica dónde reside tu empresa:</h2>
                                 </div>
                                 <div class="panel-body text-center hidden-xs">
                                     <div class="col-xs-6" id="ce_estado_map_estados_box">
                                         <h4>ESTADO</h4>
                                         <div class="map-box" id="ce_estado_map_estados"></div>
-                                        <h3></h3>
-                                        <p>Selecciona esta opcion si tu empresa opera en un solo estado</p>
+                                        <p class="sel-map1">Selecciona esta opción si tu empresa opera en un solo estado</p>
                                     </div>
                                     <div class="col-xs-6" id="ce_estado_map_full_box">
                                         <h4>NACIONAL/ INTERTESTATAL</h4>
                                          <div class="map-box" id="ce_estado_map_full"></div>
-                                       <p>Selecciona esta opcion si tu empresa opera en dos o mas estados</p>
+                                       <p class="sel-map">Selecciona esta opción si tu empresa opera en dos o mas estados</p>
                                     </div>
                                 </div>
                                 <div class="panel-body text-center visible-xs">
@@ -152,27 +158,27 @@
                                 </div>
                                 <div class="panel-body">
                                     <form class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Residencia</label>
+                                        <div class="form-group hidden">
+                                            <label class="col-sm-4 control-label ">Residencia</label>
                                             <div class="col-sm-8">
                                               <p class="form-control-static" id="ce_form_element_residencia"></p>
                                             </div>
                                           </div>
                                         <div class="form-group">
-                                            <label  class="col-sm-4 control-label">¿En que sector trabaja su empresa?</label>
+                                            <label  class="col-sm-4 control-label ico-window">¿En que sector trabaja su empresa?</label>
                                             <div class="col-sm-8">
                                                 <select class="form-control" id="ce_form_element_sector">
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label">En total ¿Cuantos trabajadores tiene su empresa?</label>
+                                            <label class="col-sm-4 control-label ico-personas">En total ¿Cuantos trabajadores tiene su empresa?</label>
                                             <div class="col-sm-8">
                                                 <input type="number" class="form-control" placeholder="Ingresa la cantidad" id="ce_form_element_trabajadores">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label">¿Cual es el valor en pesos de la produccion anual de su empresa?</label>
+                                            <label class="col-sm-4 control-label ico-pesos">¿Cuál es el la utilidad de la producción anual de su empresa?</label>
                                             <div class="col-sm-8">
                                                 <input type="number" class="form-control" placeholder="Ingresa la cantidad" id="ce_form_element_produccion">
                                             </div>
@@ -211,23 +217,23 @@
                                         <p>Yo calcule mi productividad con esta excelente app, el resultado fue de <span class="c-share-text-prod">24% mas</span> productivo que el promedio nacional. Descubre que tan productivo eres.</textarea>
                                     </div>
                                     <div class="text-center">
-                                        <p>Compartir via:</p>
+                                        <p class="compartir">Compartir via:</p>
                                         <p>
-                                            <a class="btn btn-default btn-lg c-share-link-fb" href="#" target="_blank" >
+                                            <a class="c-share c-share-link-fb" href="#" target="_blank" >
                                                 <span class="icon-large icon-facebook" ></span>
-                                                <span class="">Facebook</span>
+                                                <span class="red-txt">Facebook</span>
                                             </a>
-                                            <a class="btn btn-default btn-lg c-share-link-tw" href="#" target="_blank" >
+                                            <a class="c-share c-share-link-tw" href="#" target="_blank" >
                                                 <span class="icon-large icon-twitter" ></span>
-                                                <span class="">Twitter</span>
+                                                <span class="red-txt">Twitter</span>
                                             </a>
-                                            <a class="btn btn-default btn-lg c-share-lin-em" href="#" target="_blank" >
+                                            <a class="c-share c-share-lin-em" href="#" target="_blank" >
                                                 <span class="icon-large icon-envelope" ></span>
-                                                <span class="">Email</span>
+                                                <span class="red-txt">Email</span>
                                             </a>
                                         </p>
                                     </div>
-                                    <a href="#" class="btn btn-primary btn-lg btn-block">
+                                    <a href="#" class="btn btn-primary btn-lg btn-block recalcular">
                                         <span>Volver a calcular mi productividad</span>
                                     </a>
                                 </div>
@@ -240,21 +246,21 @@
         <script type="text/template" id="cp_main_template">
             <div class="row calculadora" id="cp_block">
                 <ul class="list-group col-sm-2 text-center hidden-xs">
-                    <li class="list-group-item">
+                    <li class="list-group-item binicio">
                         <a href="#">
                         <span class="glyphicon glyphicon-home"></span><br>
                         <span class="glyphicon-class">inicio</span>
                         </a>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item bformulario">
                         <span class="glyphicon glyphicon-list-alt"></span><br>
                         <span class="glyphicon-class">formulario</span>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item bresultados">
                         <span class="glyphicon glyphicon-th-list"></span><br>
                         <span class="glyphicon-class">resultados</span>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item bcomparte">
                         <span class="glyphicon glyphicon-star"></span><br>
                         <span class="glyphicon-class">comparte</span>
                     </li>
@@ -264,39 +270,40 @@
                         <div class="col-sm-10  col-sm-offset-1">
                             <div class="panel panel-default hidden" id="cp_form">
                                 <div class="panel-heading">
-                                    <h2 class="panel-title">Completa el siguiente formulario para realizar el diagnostico:</h2>
+                                    <h2 class="panel-title">COMPLETA EL SIGUIENTE FORMULARIO
+PARA REALIZAR EL DIAGNÓSITCO:</h2>
                                 </div>
                                 <div class="panel-body">
                                     <form class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label  class="col-sm-4 control-label">¿En que sector trabajas?</label>
+                                        <div class="form-group par">
+                                            <label  class="col-sm-4 control-label ico-window">¿En que sector trabajas?</label>
                                             <div class="col-sm-8">
                                                 <select class="form-control" id="cp_form_element_sector">
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">¿Cual es tu grado de estudios?</label>
+                                        <div class="form-group none">
+                                            <label class="col-sm-4 control-label ico-birrete">¿Cual es tu grado de estudios?</label>
                                             <div class="col-sm-8">
                                                 <select class="form-control" id="cp_form_element_estudio">
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">¿Cual es tu salario mensual?</label>
+                                        <div class="form-group par">
+                                            <label class="col-sm-4 control-label ico-pesos">¿Cual es tu salario mensual?</label>
                                             <div class="col-sm-8">
                                                 <input type="number" class="form-control" placeholder="Ingresa tu salario" id="cp_form_element_salario">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">¿Cuantas horas trabajas al dia?</label>
+                                        <div class="form-group none">
+                                            <label class="col-sm-4 control-label ico-reloj">¿Cuantas horas trabajas al dia?</label>
                                             <div class="col-sm-8">
                                                 <select class="form-control" id="cp_form_element_horas">
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">¿Cuantos dias trabajas a la semana?</label>
+                                        <div class="form-group par">
+                                            <label class="col-sm-4 control-label ico-calendario">¿Cuantos dias trabajas a la semana?</label>
                                             <div class="col-sm-8">
                                                 <select class="form-control" id="cp_form_element_dias">
                                                     <option value="1">1</option>
@@ -345,21 +352,21 @@
                                     <div class="text-center">
                                         <p>Compartir via:</p>
                                         <p>
-                                            <a class="btn btn-default btn-lg c-share-link-fb" href="#" target="_blank" >
+                                            <a class="c-share c-share-link-fb" href="#" target="_blank" >
                                                 <span class="icon-large icon-facebook" ></span>
-                                                <span class="">Facebook</span>
+                                                <span class="red-txt">Facebook</span>
                                             </a>
-                                            <a class="btn btn-default btn-lg c-share-link-tw" href="#" target="_blank" >
+                                            <a class="c-share c-share-link-tw" href="#" target="_blank" >
                                                 <span class="icon-large icon-twitter" ></span>
-                                                <span class="">Twitter</span>
+                                                <span class="red-txt">Twitter</span>
                                             </a>
-                                            <a class="btn btn-default btn-lg c-share-lin-em" href="#" target="_blank" >
+                                            <a class="c-share c-share-lin-em" href="#" target="_blank" >
                                                 <span class="icon-large icon-envelope" ></span>
-                                                <span class="">Email</span>
+                                                <span class="red-txt">Email</span>
                                             </a>
                                         </p>
                                     </div>
-                                    <a href="#" class="btn btn-primary btn-lg btn-block">
+                                    <a href="#" class="btn btn-primary btn-lg btn-block recalcular">
                                         <span>Volver a calcular mi productividad</span>
                                     </a>
                                 </div>
@@ -381,9 +388,9 @@
             <input id="cp_salario" value="" min="0.0" step="any" type="number"/>
             <label for="cp_horas_dia">Horas trabajadas al día</label>
             <input id="cp_horas_dia" value="" min="1" max="24" step="1" type="number"/>
-            <label for="cp_dias_semana">Dias trabjados a la semana</label>
+            <label for="cp_dias_semana">Dias trabajados a la semana</label>
             <input id="cp_dias_semana" value="" min="1" max="7" step="1" type="number"/>
-            <label for="cp_horas_mes">Horas trabjados al mes</label>
+            <label for="cp_horas_mes">Horas trabajadas al mes</label>
             <input id="cp_horas_mes" value="" readonly min="0" step="1" type="number"/>                    
             <label for="cp_salario_hora">Salario por hora que usted percibe</label>
             <input id="cp_salario_hora" value="" readonly min="0.0" step="any" type="number"/>
@@ -409,7 +416,7 @@
             <select id="ce_sector"></select>
             <label for="ce_trabajadores">Trabajadores</label>
             <input id="ce_trabajadores" value="" />
-            <label for="ce_produccion">Produccion</label>
+            <label for="ce_produccion">Producción</label>
             <input id="ce_produccion" value="" />
             <label for="ce_productividad_empresa" >Productividad de su Empresa</label>
             <input id="ce_productividad_empresa" value="" disabled="disabled"/>                
