@@ -14,7 +14,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             self.render();
         },
         events: {
-            "click #cp_form_element_submit": "showProductivity",
+            "click #cp_form_element_submit": "validateForm",
             "click #cp_result_sharebtn": "showShare"
         },
         render: function() {
@@ -23,7 +23,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             self.$el.html(template).addClass('container-fluid');
             return this;
         },
-        close: function(){
+        close: function() {
             delete this.gauge;
             this.remove();
         },
@@ -43,12 +43,14 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                 url: self.dataUrls.datosUrl,
                 dataType: 'text'
             }),
-            sectorElement = $('#cp_form_element_sector',self.$el).empty(),
-                    estudiosElement = $('#cp_form_element_estudio',self.$el).empty(),
-                    horasElement = $('#cp_form_element_horas',self.$el).empty(),
-                    salarioElement = $('#cp_form_element_salario',self.$el).val(''),
-                    diasElement = $('#cp_form_element_dias',self.$el).empty();
-            
+            sectorElement = $('#cp_form_element_sector', self.$el),
+                    estudiosElement = $('#cp_form_element_estudio', self.$el),
+                    horasElement = $('#cp_form_element_horas', self.$el).empty(),
+                    salarioElement = $('#cp_form_element_salario', self.$el).val(''),
+                    diasElement = $('#cp_form_element_dias', self.$el).empty(),
+                    submitElement = $("#cp_form_element_submit"),
+                    error = false;
+
             $.when(sectoresRequest, estudiosRequest, datosRequest).then(function(sectores, estudios, datos) {
                 self.model.loadData(sectores[0], estudios[0], datos[0]);
 
@@ -65,32 +67,6 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                     diasElement.append($('<option></option>').val(i).text(i));
                 }
 
-                sectorElement.val(self.model.get("sector")).change(function() {
-                    self.model.set("sector",sectorElement.val());
-                });
-                estudiosElement.val(self.model.get("estudio")).change(function() {
-                    self.model.set("estudio",estudiosElement.val());
-                });
-                horasElement.val(self.model.get("horasDia")).change(function() {
-                    self.model.set("horasDia",horasElement.val());
-                });
-                diasElement.val(self.model.get("diasSemana")).change(function() {
-                    self.model.set("diasSemana",diasElement.val());
-                });
-               
-                salarioElement.val(self.model.get("salarioMes")).on("keyup change",function(e){
-                    var oldVal = self.model.get("salarioMes"),
-                        numStr = parseFloat(salarioElement.val()).toFixed(2);
-                    if (!isNaN(numStr)){
-                        self.model.set("salarioMes",numStr);
-                        return numStr;
-                    }else{
-                        salarioElement.val(oldVal);
-                        e.preventDefault;                        
-                        return false;
-                    }
-                });
-
                 callback.apply(self, callback);
                 self.dataLoaded = true;
             }, function(e) {
@@ -100,6 +76,53 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                     error.apply(e, error);
                 }
             });
+
+        },
+        validateForm: function(e) {
+            e && e.preventDefault && e.preventDefault();
+            var self = this,
+                    error = false,
+                    sectorElement = $('#cp_form_element_sector', self.$el),
+                    estudiosElement = $('#cp_form_element_estudio', self.$el),
+                    horasElement = $('#cp_form_element_horas', self.$el),
+                    salarioElement = $('#cp_form_element_salario', self.$el),
+                    diasElement = $('#cp_form_element_dias', self.$el),
+                    error = false;
+            $('#cp_form').find('.alert').addClass('hidden');
+            
+            if (sectorElement.val() === '') {
+                sectorElement.closest('.form-group').find('.alert').removeClass('hidden');
+                error = true;
+            }
+            if (estudiosElement.val() === '') {
+                estudiosElement.closest('.form-group').find('.alert').removeClass('hidden');
+                error = true;
+            }
+            if (horasElement.val() === '') {
+                horasElement.closest('.form-group').find('.alert').removeClass('hidden');
+                error = true;
+            }
+
+            if (diasElement.val() === '') {
+                diasElement.closest('.form-group').find('.alert').removeClass('hidden');
+                error = true;
+            }
+            
+            if (salarioElement.val() === '' || isNaN(parseFloat(salarioElement.val()).toFixed(2))) {
+                salarioElement.closest('.form-group').find('.alert').removeClass('hidden');
+                error = true;
+            }
+
+            if (error === false) {
+                self.model.set("sector", sectorElement.val());
+                self.model.set("estudio", estudiosElement.val());
+                self.model.set("horasDia", horasElement.val());
+                self.model.set("diasSemana", diasElement.val());
+                self.model.set("salarioMes", parseFloat(salarioElement.val()).toFixed(2));
+                self.loadProductivity();
+            }
+
+            return false;
         },
         hidePanels: function() {
             $('.panel', this.$el).addClass('hidden');
@@ -121,32 +144,32 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
                     prod = 0,
                     text = '',
                     estudio = '';
-            
+
             $('#cp_result .c-result-text-sector', this.$el).text(opcionesSectores[self.model.get('sector')]);
-            
-            if(self.model.get('estudio') == 1){
-                estudio = ' con un nivel de educacion de '+opcionesEstudios[self.model.get('estudio')];
-            }else{
+
+            if (self.model.get('estudio') == 1) {
+                estudio = ' con un nivel de educacion de ' + opcionesEstudios[self.model.get('estudio')];
+            } else {
                 estudio = ' con cualquier nivel de educacion.';
             }
-            
+
             $('#cp_result p .c-result-text-estudio', this.$el).text(estudio);
             $('#cp_result li .c-result-text-estudio', this.$el).text(opcionesEstudios[self.model.get('estudio')]);
 
             prod = self.model.get('productividad');
-            text = prod+'% ';
-            if(prod < 0){
+            text = prod + '% ';
+            if (prod < 0) {
                 text += 'menos';
-            }else if(prod > 0){
+            } else if (prod > 0) {
                 text += 'mas';
-            }else{
+            } else {
                 text = 'igual de ';
             }
-            
-            $('#cp_result .c-result-text-prod', this.$el).text(text);            
-            
+
+            $('#cp_result .c-result-text-prod', this.$el).text(text);
+
             this.renderGauge();
-            this.updateGauge();            
+            this.updateGauge();
         },
         showShare: function(e) {
             var self = this, prod = 0, text = '';
@@ -154,33 +177,33 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             this.hidePanels();
             $('#cp_share', this.$el).removeClass('hidden').addClass('visible');
             prod = self.model.get('productividad');
-            text = prod+'% ';
-            if(prod < 0){
+            text = prod + '% ';
+            if (prod < 0) {
                 text += 'menos ';
-            }else if(prod > 0){
+            } else if (prod > 0) {
                 text += 'mas ';
-            }else{
+            } else {
                 text = 'igual de ';
             }
-            
-            $('#cp_share .c-share-text-prod',this.$el).text(text);
-            
-            var shareText = $('#cp_share div.well' , this.$el ).text().trim();
-            shareText = encodeURIComponent(shareText)+": "+window.location;
+
+            $('#cp_share .c-share-text-prod', this.$el).text(text);
+
+            var shareText = $('#cp_share div.well', this.$el).text().trim();
+            shareText = encodeURIComponent(shareText) + ": " + window.location;
             console.log($('#cp_share .c-share-link-em', self.$el));
-            $('#cp_share .c-share-link-em', self.$el).attr('href','mailto:?to=&subject=calculadora%20de%20productividad&body='+shareText);
-            $('#cp_share .c-share-link-fb', self.$el).attr('href','http://www.facebook.com/sharer/sharer.php?u='+window.location);
-            $('#cp_share .c-share-link-tw', self.$el).attr('href','http://twitter.com/home?status='+shareText);
-            
+            $('#cp_share .c-share-link-em', self.$el).attr('href', 'mailto:?to=&subject=calculadora%20de%20productividad&body=' + shareText);
+            $('#cp_share .c-share-link-fb', self.$el).attr('href', 'http://www.facebook.com/sharer/sharer.php?u=' + window.location);
+            $('#cp_share .c-share-link-tw', self.$el).attr('href', 'http://twitter.com/home?status=' + shareText);
+
         },
         renderGauge: function() {
-            var gauge = new Gagauge($('#cp_result canvas',this.$el)[0]); // create sexy gauge!
+            var gauge = new Gagauge($('#cp_result canvas', this.$el)[0]); // create sexy gauge!
             gauge.set(0); // set actual value
             this.gauge = gauge;
         },
         updateGauge: function() {
             var self = this,
-                    el = this.$el,                   
+                    el = this.$el,
                     productividad = self.model.get('productividad'),
                     color = '#66FF99', bgcolor = '#fff';
 

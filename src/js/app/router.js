@@ -20,7 +20,7 @@ define([
             'empresas/*estado': 'showEmpresaCalculadoraEstado',
             '*actions': 'loader'
         },
-        loadView: function(name,opts){
+        loadView: function(name,opts,reload){
             var base = $('#container'), view = null;
             if(this.viewName != name){
                 this.view && (this.view.close ? this.view.close() : this.view.remove());
