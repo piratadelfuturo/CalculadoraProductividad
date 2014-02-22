@@ -1,4 +1,5 @@
-define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gagauge', "../data/mexico_paths", "../data/mexico_empresa_estados", "../data/mexico_empresa_sectores", 'raphael', 'graphael', 'bootstrap'], function(backbone, _, EmpresaCalculadora, $, Gagauge, mexico_paths, mexico_empresa_estados, mexico_empresa_sectores, Raphael) {
+define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gagauge', "../data/mexico_paths", "../data/mexico_empresa_estados", "../data/mexico_empresa_sectores", "../data/mexico_efemerides_empresa",'raphael', 'graphael', 'bootstrap'],
+function(backbone, _, EmpresaCalculadora, $, Gagauge, mexico_paths, mexico_empresa_estados, mexico_empresa_sectores, efemerides, Raphael) {
     var EmpresaCalculadoraView = Backbone.View.extend({
         tagName: "div",
         id: "ce_view",
@@ -170,7 +171,7 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
         removeMaps: function() {
             _.map(this.r, function(r) {
                 r && (r.remove && r.remove());
-            })
+            });
         },
         loadFormData: function(estado, callback, error) {
             callback = !callback ? function() {
@@ -209,7 +210,7 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
             self.hidePanels();
             $('#ce_estado', self.$el).addClass('visible').removeClass('hidden');
             this.renderMapEstados();
-            this.renderMapFull()
+            this.renderMapFull();
         },
         loadForm: function() {
             this.app.navigate(
@@ -283,6 +284,12 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
             $('#ce_share .c-share-text-prod', this.$el).text(text);
 
             var shareText = $('#ce_share div.well', this.$el).text().trim();
+            
+            if(efemerides[self.model.get('sector')][self.model.get('estudio')]){
+                var efem = efemerides[self.model.get('sector')][self.model.get('estudio')];
+                $('#ce_share div.well', this.$el).text(shareText+' '+efem);
+            }
+            
             shareText = encodeURIComponent(shareText) + ": " + window.location;
             console.log($('#ce_share .c-share-link-em', self.$el));
             $('#ce_share .c-share-link-em', self.$el).attr('href', 'mailto:?to=&subject=calculadora%20de%20productividad&body=' + shareText);
@@ -313,7 +320,7 @@ define(['backbone', 'underscore', "../models/EmpresaCalculadora", 'jquery', 'gag
             }
             self.gauge.set(productividad);
             self.gauge.color(color, bgcolor);
-        },
+        }
     });
     return EmpresaCalculadoraView;
 });
