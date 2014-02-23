@@ -49,7 +49,6 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                             side = 1,
                     productividad = parseFloat(self.get('productividadEmpresa') / self.get('productividadComparada'));
                     productividad = isNaN(productividad) ||  productividad === Infinity? 0 : productividad.toFixed(2);
-                    console.log(productividad, self.get('productividadEmpresa'), self.get('productividadComparada'));
                     if(productividad < 1){
                         productividad = 1 - productividad;
                         side = -1;
