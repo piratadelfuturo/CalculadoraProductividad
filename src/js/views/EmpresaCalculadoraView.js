@@ -261,6 +261,29 @@ function(backbone, _, EmpresaCalculadora, $, Gagauge, mexico_paths, mexico_empre
             }
 
             $('#ce_result .c-result-text-prod', this.$el).text(text);
+            
+            console.log(
+                    efemerides,
+                    self.model.get('sector'),
+                    self.model.get('estado'),
+                    efemerides[self.model.get('sector')][self.model.get('estado')]
+                );
+            if(!!efemerides[self.model.get('sector')][self.model.get('estado')]){
+                var efem = efemerides[self.model.get('sector')][self.model.get('estado')];
+                $('#ce_result .c-result-text-efem', this.$el).text(efem);
+            }
+            $('#ce_result .c-result-text-efem', this.$el).text(text);
+            
+            console.log(
+                    efemerides,
+                    self.model.get('sector'),
+                    self.model.get('estado'),
+                    efemerides[self.model.get('sector')][self.model.get('estado')]
+                );
+            if(!!efemerides[self.model.get('sector')][self.model.get('estado')]){
+                var efem = efemerides[self.model.get('sector')][self.model.get('estado')];
+                $('#ce_result .c-result-text-efem', this.$el).text(efem);
+            }
 
             this.renderGauge();
             this.updateGauge();
@@ -284,17 +307,7 @@ function(backbone, _, EmpresaCalculadora, $, Gagauge, mexico_paths, mexico_empre
 
             var shareText = $('#ce_share div.well', this.$el).text().trim();
             
-            console.log(
-                    efemerides,
-                    self.model.get('sector'),
-                    self.model.get('estado'),
-                    efemerides[self.model.get('sector')][self.model.get('estado')]
-                );
-            if(!!efemerides[self.model.get('sector')][self.model.get('estado')]){
-                var efem = efemerides[self.model.get('sector')][self.model.get('estado')];
-                $('#ce_share div.well', this.$el).text(shareText+' '+efem);
-            }
-            
+                        
             shareText = encodeURIComponent(shareText) + ": " + window.location;
             $('#ce_share .c-share-link-em', self.$el).attr('href', 'mailto:?to=&subject=calculadora%20de%20productividad&body=' + shareText);
             $('#ce_share .c-share-link-fb', self.$el).attr('href', 'http://www.facebook.com/sharer/sharer.php?u=' + window.location);
