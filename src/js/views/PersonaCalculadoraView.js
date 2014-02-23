@@ -169,6 +169,11 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
 
             $('#cp_result .c-result-text-prod', this.$el).text(text);
 
+            if(efemerides[self.model.get('estudio')] && efemerides[self.model.get('estudio')].length > 0){
+                var efem = efemerides[self.model.get('estudio')][Math.floor(Math.random()*efemerides[self.model.get('estudio')].length)];
+                $('#cp_result .c-result-text-efem', this.$el).text(efem);
+            }
+            
             this.renderGauge();
             this.updateGauge();
         },
@@ -191,12 +196,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
 
             var shareText = $('#cp_share div.well', this.$el).text().trim();
             
-            if(efemerides[self.model.get('estudio')] && efemerides[self.model.get('estudio')].length > 0){
-                var efem = efemerides[self.model.get('estudio')][Math.floor(Math.random()*efemerides[self.model.get('estudio')].length)];
-                $('#ce_share div.well', this.$el).text(shareText+' '+efem);
-            }
-
-            
+                                    
             shareText = encodeURIComponent(shareText) + ": " + window.location;
             console.log($('#cp_share .c-share-link-em', self.$el));
             $('#cp_share .c-share-link-em', self.$el).attr('href', 'mailto:?to=&subject=calculadora%20de%20productividad&body=' + shareText);
