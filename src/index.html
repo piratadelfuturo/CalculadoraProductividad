@@ -13,28 +13,28 @@
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        
         <![endif]-->
         <link href="css/main.css" rel="stylesheet">
         <link href="css/theme.css" rel="stylesheet">
+        <link href="formalizer/css/formalize.css" rel="stylesheet"/>
+         <script src="formalizer/js/jquery.formalize.js"></script>
     </head>
     <body>
         <header class="navbar navbar-default navbar-static-top" >
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand">#ParaSerM&aacute;sProductivo</a>
+                    <a class="navbar-brand"><a href="http://www.mexicocomovamos.com/productividad/index.html/" target="_self">#ParaSerM&aacute;sProductivo</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li> <a href="#" class="icon facebook">
-                                Facebook
-                            </a> </li>
-                        <li> <a href="#" class="icon twitter">
-                                Twitter
-                            </a></li>
+                    <li><p>SIGUENOS EN: &nbsp;</p></li>
+                    <li><a href="#" class="icon facebook">Facebook</a></li>
+                    <li> <a href="#" class="icon twitter">Twitter</a></li>
                     </ul>
                 </div>
             </div>
-        </header>
+         </header>
         <section id="container"></section>
         <footer class="navbar navbar-default navbar-fixed-bottom">
             <div class="container-fluid">
@@ -55,10 +55,7 @@
                         <li><a href="#">
                                 Acerca de
                             </a></li>
-                        <li><a href="#">
-                                Contacto
-                            </a></li>
-                        <li><a href="">
+                         <li><a href="">
                                 Políticas de privacidad
                             </a></li>
                            <li><a href="">
@@ -73,7 +70,7 @@
                         <div class="col-sm-8  col-sm-offset-2">
                             <div class="panel panel-default" id="main_dialog">
                                 <div class="panel-heading">
-                                    <h2 class="panel-title">¿Y tu eres productivo?</h2>
+                                    <h2 class="panel-title">¿Y tú eres productivo?</h2>
                                 </div>
                                 <div class="panel-body">
                                 <div class="intro">
@@ -118,7 +115,7 @@
                         <span class="glyphicon-class">Comparte</span>
                     </li>
                 </ul>
-                <div class="col-md-10">
+                <div class="col-md-10 main-container">
                     <div class="row">
                         <div class="col-sm-10  col-sm-offset-1">
                             <div class="panel panel-default hidden" id="ce_estado">
@@ -194,7 +191,8 @@
                                             <div class="alert alert-danger hidden">
                                                 Favor de indicar la utilidad anual!
                                             </div>
-                                        </div>                                        
+                                        </div>
+                                                                                
                                         <button type="button" class="btn btn-default btn-lg btn-block" id="ce_form_element_submit">
                                             Calcular productividad
                                         </button>
@@ -206,10 +204,10 @@
                                     <h2 class="panel-title">El resultado de la calculadora es:</h2>
                                 </div>
                                 <div class="panel-body">
-                                    <p class="c-result-text">La productividad de su empresa es <span class="c-result-text-prod"></span> productiva que el promedio nacional de empresas en el sector de <span class="c-result-text-sector" ></span>, que radican <span class="c-result-text-estado"></span></p>
+                                    <p class="c-result-text top">La productividad de su empresa es <span class="c-result-text-prod"></span> productiva que el promedio nacional de empresas en el sector de <span class="c-result-text-sector" ></span>, que radican <span class="c-result-text-estado"></span></p>
                                     
                                     <canvas width="300" height="300" class="center-block c-result-graph"></canvas>
-                                    <ul id="" class="pull-right c-result-data">
+                                    <ul id="" class="pull-left c-result-data">
                                         <li><span class="glyphicon glyphicon-th-large" ></span>
                                             <span class="c-result-text-sector"></span></li>
                                         <li><span class="glyphicon glyphicon-book" ></span>
@@ -341,9 +339,12 @@ PARA REALIZAR EL DIAGNÓSITCO:</h2>
                                                 Favor de ingresar los días trabajados a la semana!
                                             </div>
                                         </div>
+                                         <div class="form-group boton">
                                         <button type="button" class="btn btn-default btn-lg btn-block" id="cp_form_element_submit">
                                             Calcular productividad
                                         </button>
+                                        
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -352,11 +353,11 @@ PARA REALIZAR EL DIAGNÓSITCO:</h2>
                                     <h2 class="panel-title">El resultado de la calculadora es:</h2>
                                 </div>
                                 <div class="panel-body">
-                                    <p class="c-result-text">Eres <span class="c-result-text-prod"></span> productivo que el promedio nacional de las personas que trabajan en <span class="c-result-text-sector" ></span>, <span class="c-result-text-estudio"></span></p>
+                                    <p class="c-result-text top">Eres <span class="c-result-text-prod"></span> productivo que el promedio nacional de las personas que trabajan en <span class="c-result-text-sector" ></span>, <span class="c-result-text-estudio"></span></p>
                                      <canvas width="300" height="300" class="center-block c-result-graph"></canvas>
                                     
                                     
-                                      <ul class="c-result-text pull-right c-result-data">
+                                      <ul class="c-result-text pull-left c-result-data">
                                         <li><span class="glyphicon glyphicon-th-large" ></span>
                                             <span class="c-result-text-sector"></span></li>
                                         <li><span class="glyphicon glyphicon-book" ></span>
