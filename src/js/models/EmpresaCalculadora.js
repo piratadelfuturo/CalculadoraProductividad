@@ -57,8 +57,8 @@ define(['backbone', 'underscore', "../models/Calculadora"], function(backbone, _
                     }else{
                         productividad = 0;
                     }
-                    productividad = productividad * 100;
-                    productividad = Math.floor(parseFloat(productividad) * 100) * side;
+                    productividad = productividad * 100 / 10;
+                    productividad = Math.floor(parseFloat(productividad) * 100 / 10) * side;
                     self.set('productividad', productividad );
                 },
                 loadData: function(d) {
