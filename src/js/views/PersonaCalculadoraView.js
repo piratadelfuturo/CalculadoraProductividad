@@ -160,9 +160,9 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             prod = self.model.get('productividad');
             text = prod + '% ';
             if (prod < 0) {
-                text += 'menos';
+                text += '';
             } else if (prod > 0) {
-                text += 'mas';
+                text += 'mayor';
             } else {
                 text = 'igual de ';
             }
@@ -185,9 +185,9 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             prod = self.model.get('productividad');
             text = prod + '% ';
             if (prod < 0) {
-                text += 'menos ';
+                text += ' ';
             } else if (prod > 0) {
-                text += 'mas ';
+                text += 'mayor ';
             } else {
                 text = 'igual de ';
             }

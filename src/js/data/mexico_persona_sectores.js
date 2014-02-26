@@ -1,20 +1,14 @@
 define([], function() {
     return [
         "Total",
-        "Primario",
         "Agricultura, ganadería, aprovechamiento forestal, pesca y caza",
-        "Secundario",
-        "Otros",
         "Industria extractiva y de la electricidad",
         "Minería",
         "Electricidad, agua y suministro de gas por ductos al consumidor final",
         "Construcción",
         "Industrias manufactureras",
-        "Terciario",
-        "Comercio",
         "Comercio al por mayor",
         "Comercio al por menor",
-        "Servicios",
         "Transportes, comunicaciones, correo y almacenamiento",
         "Transportes, correos y almacenamiento",
         "Información en medios masivos",
@@ -30,8 +24,6 @@ define([], function() {
         "Servicios diversos",
         "Servicios de esparcimiento, culturales y deportivos, y otros servicios recreativos",
         "Otros servicios excepto actividades de gobierno",
-        "Servicios de alojamiento temporal y de preparación de alimentos y bebidas",
-        "Actividades del gobierno y de organismos internacionales y extraterritoriales",
-        "No especificado"];
+        "Servicios de alojamiento temporal y de preparación de alimentos y bebidas"];
 
 });
