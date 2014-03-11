@@ -594,5 +594,24 @@ define(['underscore', '../data/mexico_empresa_estados', '../data/mexico_empresa_
     efemerides[18][29] = '¿Sabías que Tlaxcala es el 30º lugar en productividad en cuanto a servicios personales, de mantenimiento entre otros excepto servicios gubernamentales?';
     efemerides[18][7] = '¿Sabías que Chiapas es el 31º lugar en productividad en cuanto a servicios personales, de mantenimiento entre otros excepto servicios gubernamentales?';
     efemerides[18][32] = '¿Sabías que Zacatecas es el 32º lugar en productividad en cuanto a servicios personales, de mantenimiento entre otros excepto servicios gubernamentales?';
+efemerides[1][0] = '.';
+efemerides[2][0] = '.';
+efemerides[3][0] = '.';
+efemerides[4][0] = '.';
+efemerides[5][0] = '.';
+efemerides[6][0] = '.';
+efemerides[7][0] = '.';
+efemerides[8][0] = '.';
+efemerides[9][0] = '.';
+efemerides[10][0] = '.';
+efemerides[11][0] = '.';
+efemerides[12][0] = '.';
+efemerides[13][0] = '.';
+efemerides[14][0] = '.';
+efemerides[15][0] = '.';
+efemerides[16][0] = '.';
+efemerides[17][0] = '.';
+efemerides[18][0] = '.';
+
     return efemerides;
 });
