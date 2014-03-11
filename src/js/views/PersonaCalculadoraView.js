@@ -168,6 +168,7 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             }
 
             $('#cp_result .c-result-text-prod', this.$el).text(text);
+            $('#cp-result-referencia', this.$el).text(self.model.get('salarioComparado'));
 
             if(efemerides[self.model.get('estudio')] && efemerides[self.model.get('estudio')].length > 0){
                 var efem = efemerides[self.model.get('estudio')][Math.floor(Math.random()*efemerides[self.model.get('estudio')].length)];
@@ -195,10 +196,8 @@ define(['backbone', 'underscore', "../models/PersonaCalculadora", 'jquery', 'gag
             $('#cp_share .c-share-text-prod', this.$el).text(text);
 
             var shareText = $('#cp_share div.well', this.$el).text().trim();
-            
                                     
             shareText = encodeURIComponent(shareText) + ": " + window.location;
-            console.log($('#cp_share .c-share-link-em', self.$el));
             $('#cp_share .c-share-link-em', self.$el).attr('href', 'mailto:?to=&subject=calculadora%20de%20productividad&body=' + shareText);
             $('#cp_share .c-share-link-fb', self.$el).attr('href', 'http://www.facebook.com/sharer/sharer.php?u=' + window.location);
             $('#cp_share .c-share-link-tw', self.$el).attr('href', 'http://twitter.com/home?status=' + shareText);
