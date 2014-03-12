@@ -136,7 +136,7 @@ height:182px;
 text-indent:-9999px;
 background-image:url(../img/bpersonas.jpg);
 background-repeat:no-repeat;
-display:inherit;
+display:none;
 margin-bottom:5px;
 }
 
@@ -641,6 +641,13 @@ border:none;
 #acerca .intro > ul {
     line-height: 22px;
     list-style-type: disc;
+}
+
+.c-result-text-efem {
+    clear: both;
+    display: block;
+    position: relative;
+    text-align: center;
 }
 
 /* Large desktops and laptops */
