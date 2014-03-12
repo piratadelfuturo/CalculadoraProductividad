@@ -8,6 +8,7 @@ requirejs.config(
                 "gagauge": "../libs/gagauge",
                 "raphael": '../libs/raphael-min',
                 "graphael": "../libs/g.raphael-min",
+                "accounting": "../libs/accounting.min",
                 'facebook': '//connect.facebook.net/en_US/all'
             },
             shim: {
@@ -30,6 +31,9 @@ requirejs.config(
                 },
                 "gauge": {
                     exports: 'Gauge'
+                },
+                "accounting":{
+                    exports: "accounting"
                 }
             }
         });
