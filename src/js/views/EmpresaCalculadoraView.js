@@ -292,7 +292,7 @@ define([
                         $('#ce_result .c-result-text-efem', this.$el).text(efem);
                     }
                     $('#ce_result .c-result-text-efem', this.$el).text(text);
-                    $('#ce-result-referencia', this.$el).text(accounting.formatMoney(self.model.get('productividadComparada')));
+                    $('#ce_result .ce-result-referencia', this.$el).text(accounting.formatMoney(self.model.get('productividadComparada')));
 
 
                     if (!!efemerides[self.model.get('sector')][self.model.get('estado')]) {
